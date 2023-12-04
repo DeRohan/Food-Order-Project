@@ -73,6 +73,12 @@ table tr td {
     background-color: #079992;
 }
 
+#status {
+    width: 100;
+    height: 30;
+    background-color: #38ada9;
+    font-size: 15;
+}
 .success {
     color: #2ed573;
 }
