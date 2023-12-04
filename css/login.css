@@ -114,11 +114,12 @@ input {
 }
 
 .sign-up-container {
-	left: 0;
-	width: 50%;
-	opacity: 0;
-	z-index: 1;
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
 }
+
 
 .container.right-panel-active .sign-up-container {
 	transform: translateX(100%);

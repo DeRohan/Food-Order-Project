@@ -11,21 +11,19 @@
         <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="#">
-                    <h1>Create Account</h1>
-                    <input type="text" placeholder="First Name" />
-                    <input type="text" placeholder="Last Name" />
+                    <h1>Create Restaurent</h1>
+                    <input type="text" placeholder="Restaurent Name" />
                     <input type="text" placeholder="Username" />
-                    <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
-                    <input type="tel" placeholder="Phone Number" maxlength="11" />
                     <input type="text" placeholder="Address" minlength="20" />
+                    <input type="text" placeholder="Description" minlength="20" />
                     <button>Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="#">
                     <h1>Sign in</h1>
-                    <input type="email" placeholder="Email" />
+                    <input type="username" placeholder="username" />
                     <input type="password" placeholder="Password" />
                     <a href="#">Forgot your password?</a>
                     <button>Sign In</button>
