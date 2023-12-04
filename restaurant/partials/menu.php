@@ -1,12 +1,12 @@
 <?php 
     include('../config/connect.php'); 
-    include('login-check.php'); 
+   // include('login-check.php'); 
 ?>
 
 <html>
     <head>
         <title>Food Ordering Website - Home Page</title>
-        <link rel="stylesheet" href="../css/admin.css">
+        <link rel="stylesheet" href="../css/rest.css">
     </head>
 
     <body>
