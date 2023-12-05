@@ -43,7 +43,12 @@
                                 <td><?php echo $title; ?></td>
                                 <td><?php echo $featured; ?></td>
                                 <td><?php echo $active; ?></td>
-
+                                <?php 
+                                    if($image!=NULL) {
+                                        ?> <td><?php echo $image; ?></td>
+                                        <?php
+                                    }
+                                ?>
                             </tr>
                             <?php
                         }

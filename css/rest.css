@@ -22,7 +22,9 @@ body {
 .text-center {
     text-align: center;
 }
-
+.text-left {
+    align-content: left;
+}
 .clearfix::after {
     content: "";
     display: table;
