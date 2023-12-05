@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="" method="POST">
+                <form action="rest-sin.php" method="POST">
                     <h1>Sign in</h1>
                     <?php
                     if (isset($_SESSION['login'])) {
@@ -42,7 +42,7 @@
                     <input type="username" name="username" placeholder="Username" />
                     <input type="password" name="password" placeholder="Password" />
                     <br>
-                    <button action="rest-sin.php">Sign In</button>
+                    <button>Sign In</button>
                 </form>
             </div>
             <div class="overlay-container">
