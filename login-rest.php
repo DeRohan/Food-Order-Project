@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,7 +28,7 @@
             background-color: #007bff;
             color: #fff;
             border-radius: 5px;
-            margin: 5px;
+            margin: 8px;
         }
     </style>
 </head>
