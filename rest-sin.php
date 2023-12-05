@@ -9,7 +9,7 @@
         echo $username, $password;
         if(mysqli_num_rows($result) == 1) {
             $_SESSION['login'] = "<div class='success'>Login Successful!</div>";
-            $_SESSION['user'] = $username;
+            $_SESSION['restaurant'] = $username;
             header('location:'.$home_url.'restaurant/index.php');
         }
         // else {

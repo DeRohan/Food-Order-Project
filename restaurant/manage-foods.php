@@ -9,8 +9,16 @@
         <table class="tbl-full">
             <th>Name</th>
             <th>Price</th>
+            <th>Featured</th>
+            <th>Active</th>
+            <th>Category</th>
             <th>Image</th>
-            <th>Image</th>
+            <th>Actions</th>
+            <?php 
+                $username = $_SESSION['restaurant'];
+                // echo "hello", $username;
+        
+            ?>
         </table>
     </div>
 </div>
