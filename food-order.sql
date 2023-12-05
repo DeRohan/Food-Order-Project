@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2023 at 06:18 AM
+-- Generation Time: Dec 05, 2023 at 06:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -83,6 +83,13 @@ CREATE TABLE `tbl_food` (
   `active` varchar(10) NOT NULL,
   `res_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_food`
+--
+
+INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `cat_id`, `featured`, `active`, `res_id`) VALUES
+(2, 'Buregr', 'chicken richness', 5000, 'Food-Name-571.webp', 2, 'Yes', 'Yes', 33);
 
 -- --------------------------------------------------------
 
@@ -285,7 +292,7 @@ ALTER TABLE `tbl_categories`
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
