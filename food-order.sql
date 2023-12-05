@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2023 at 11:32 AM
+-- Generation Time: Dec 05, 2023 at 06:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -80,7 +80,8 @@ CREATE TABLE `tbl_food` (
   `image_name` varchar(255) NOT NULL,
   `cat_id` int(10) UNSIGNED NOT NULL,
   `featured` varchar(10) NOT NULL,
-  `active` varchar(10) NOT NULL
+  `active` varchar(10) NOT NULL,
+  `res_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -102,6 +103,20 @@ CREATE TABLE `tbl_orders` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_order_details`
+--
+
+CREATE TABLE `tbl_order_details` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `item_id` int(10) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_restaurants`
 --
 
@@ -109,16 +124,19 @@ CREATE TABLE `tbl_restaurants` (
   `ID` int(10) UNSIGNED NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Description` text NOT NULL,
-  `Address` varchar(255) NOT NULL
+  `Address` varchar(255) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_restaurants`
 --
 
-INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`) VALUES
-(18, 'Floc', 'You will love it all :DD', 'besides Xanders'),
-(19, 'Cafe Xanders', 'Babars Pasta is Voila!', 'zamzama');
+INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`, `username`, `password`) VALUES
+(25, 'Cafe Premo', 'www are owned by xanders', 'zamzama commerical', 'premo', 'c93ccd78b2076528346216b3b2f701e6'),
+(32, 'Cafe Xanders', 'We make the best Pasta in Karachi!', 'Phase 5 Near Dolmen Mall', 'xanders', 'c93ccd78b2076528346216b3b2f701e6'),
+(33, 'Cafe Floc', 'we are boring and like every other cafe', 'zamzama phase 5 defence', 'floc', '25d55ad283aa400af464c76d713c07ad');
 
 -- --------------------------------------------------------
 
@@ -129,7 +147,7 @@ INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`) VALUES
 CREATE TABLE `tbl_restaurant_registration` (
   `registration_id` int(10) UNSIGNED NOT NULL,
   `restaurant_id` int(10) UNSIGNED NOT NULL,
-  `registration_date` varchar(15) NOT NULL
+  `registration_date` varchar(15) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -137,8 +155,9 @@ CREATE TABLE `tbl_restaurant_registration` (
 --
 
 INSERT INTO `tbl_restaurant_registration` (`registration_id`, `restaurant_id`, `registration_date`) VALUES
-(4, 18, '2023-12-04'),
-(5, 19, '2023-12-04');
+(6, 25, '2023-12-05'),
+(7, 32, '2023-12-05'),
+(8, 33, '2023-12-05');
 
 -- --------------------------------------------------------
 
@@ -173,6 +192,13 @@ CREATE TABLE `tbl_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`user_id`, `F_Name`, `L_Name`, `username`, `email`, `password`, `phone_no`, `address`) VALUES
+(1, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar@gmail.com', '18373773', '19199191', 'station');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -193,7 +219,8 @@ ALTER TABLE `tbl_categories`
 --
 ALTER TABLE `tbl_food`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `food_fk` (`cat_id`);
+  ADD KEY `food_fk` (`cat_id`),
+  ADD KEY `rest_fk` (`res_id`);
 
 --
 -- Indexes for table `tbl_orders`
@@ -204,10 +231,19 @@ ALTER TABLE `tbl_orders`
   ADD KEY `restaurant_fk` (`restaurant_id`);
 
 --
+-- Indexes for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_fk` (`order_id`),
+  ADD KEY `item_order_fk` (`item_id`);
+
+--
 -- Indexes for table `tbl_restaurants`
 --
 ALTER TABLE `tbl_restaurants`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `tbl_restaurant_registration`
@@ -249,25 +285,31 @@ ALTER TABLE `tbl_categories`
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_restaurants`
 --
 ALTER TABLE `tbl_restaurants`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_restaurant_registration`
 --
 ALTER TABLE `tbl_restaurant_registration`
-  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_transactions`
@@ -279,7 +321,7 @@ ALTER TABLE `tbl_transactions`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -289,7 +331,8 @@ ALTER TABLE `tbl_users`
 -- Constraints for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  ADD CONSTRAINT `food_fk` FOREIGN KEY (`cat_id`) REFERENCES `tbl_categories` (`cat_id`);
+  ADD CONSTRAINT `food_fk` FOREIGN KEY (`cat_id`) REFERENCES `tbl_categories` (`cat_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rest_fk` FOREIGN KEY (`res_id`) REFERENCES `tbl_restaurants` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_orders`
@@ -297,6 +340,13 @@ ALTER TABLE `tbl_food`
 ALTER TABLE `tbl_orders`
   ADD CONSTRAINT `restaurant_fk` FOREIGN KEY (`restaurant_id`) REFERENCES `tbl_restaurants` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_order_details`
+--
+ALTER TABLE `tbl_order_details`
+  ADD CONSTRAINT `item_order_fk` FOREIGN KEY (`item_id`) REFERENCES `tbl_food` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_fk` FOREIGN KEY (`order_id`) REFERENCES `tbl_orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_restaurant_registration`

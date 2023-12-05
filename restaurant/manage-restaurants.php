@@ -14,10 +14,6 @@
             unset($_SESSION['update']);
         }
         ?>
-        <!-- Button To Add Restaurant -->
-        <a href="add-restaurant.php" class="btn-primary">Add Restaurant</a>
-        <br>
-        <br>
         <table class="tbl-full">
             <tr>
                 <th>Sr.No.</th>
@@ -26,7 +22,7 @@
                 <th>Actions</th>
             </tr>
             <?php
-            $sql = 'SELECT * FROM tbl_restaurants';
+            $sql = 'SELECT * FROM tbl_restaurants where ';
             $result = mysqli_query($conn, $sql);
             $sn = 1;
             if ($result) {
@@ -48,7 +44,6 @@
                             </td>
                             <td>
                                 <a href="update-restaurant.php?id=<?php echo $id; ?>" class="btn-secondary">Update Restaurant</a>
-                                <a href="delete-restaurant.php?id=<?php echo $id; ?>" class="btn-danger">Delete Restaurant</a>
                             </td>
                         </tr>
                         <?php

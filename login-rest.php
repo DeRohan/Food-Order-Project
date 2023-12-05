@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css\login.css">
     <title>Login Page</title>
 </head>
+
 <body>
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#">
-                    <h1>Create Restaurent</h1>
-                    <input type="text" placeholder="Restaurent Name" />
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
-                    <input type="text" placeholder="Address" minlength="20" />
-                    <input type="text" placeholder="Description" minlength="20" />
+                <form action="rest-sup.php" method="POST">
+                    <h1>Create Restaurant</h1>
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        echo $_SESSION['login'];
+                        unset($_SESSION['login']);
+                    }
+                    ?>
+                    <br><br>
+                    <input type="text" name="name" placeholder="Restaurent Name" />
+                    <input type="text" name="username" placeholder="Username" />
+                    <input type="password" name="password" placeholder="Password" minlength="8" />
+                    <input type="text" name="address" placeholder="Address" minlength="10" />
+                    <input type="text" name="description" placeholder="Description" minlength="20" />
                     <button>Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="#">
+                <form action="" method="POST">
                     <h1>Sign in</h1>
-                    <input type="username" placeholder="username" />
-                    <input type="password" placeholder="Password" />
-                    <a href="#">Forgot your password?</a>
-                    <button>Sign In</button>
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        echo $_SESSION['login'];
+                        unset($_SESSION['login']);
+                    }
+                    ?>
+                    <br><br>
+                    <input type="username" name="username" placeholder="Username" />
+                    <input type="password" name="password" placeholder="Password" />
+                    <br>
+                    <button action="rest-sin.php">Sign In</button>
                 </form>
             </div>
             <div class="overlay-container">
@@ -56,6 +72,7 @@
         </div>
     </section>
     <!-- partial -->
-    <script  src="js/login.js"></script>
+    <script src="js/login.js"></script>
 </body>
+
 </html>

@@ -18,16 +18,13 @@
                         <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="manage-restaurants.php">Restaurants</a>
+                        <a href="manage-foods.php">Foods</a>
                     </li>
                     <li>
-                        <a href="manage-category.php">Categories</a>
+                        <a href="manage-categories.php">Categories</a>
                     </li>
                     <li>
                         <a href="manage-orders.php">Orders</a>
-                    </li>
-                    <li>
-                        <a href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

@@ -15,7 +15,13 @@ h1 {
 	font-weight: bold;
 	margin: 0;
 }
+.success {
+    color: #2ed573;
+}
 
+.error {
+    color: #ff3f34;
+}
 h2 {
 	text-align: center;
 }
