@@ -26,7 +26,7 @@
                 $result2 = mysqli_query($conn, $sql2);
                 if(mysqli_num_rows($result2) > 0) {
                     while($row = mysqli_fetch_assoc($result2)) {
-                        $id = $row['ID'];
+                        $id = $row['id'];
                         $name = $row['title'];
                         $price = $row['price'];
                         $featured = $row['featured'];
