@@ -90,6 +90,7 @@ th {
     border-radius: 12px;
     text-decoration: none; /* Remove underline for the primary button */
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
 }
 
 .btn-primary:hover {
@@ -101,12 +102,13 @@ th {
 .btn-secondary {
     background-color: #28a745;
     color: #fff;
-    padding: 8px 15px;
-    margin: 20px -200px 8px 0 !important; /* Add margin to the right */
+    padding: 8px 8px;
+    margin: 20px 8px 8px 0 !important; /* Add margin to the right */
     border: 2px solid #28a745;
     border-radius: 12px;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
 }
 
 .btn-secondary:hover {
@@ -118,8 +120,8 @@ th {
 .btn-danger {
     background-color: #dc3545;
     color: #fff;
-    padding: 12px 20px;
-    /* margin-left: 225px; */
+    padding: 8px 8px;
+    margin: 20px 8px 8px 0 !important;
     border: 2px solid #dc3545;
     border-radius: 12px;
     text-decoration: none;
