@@ -7,7 +7,7 @@
 ?>
 
 <div class="main-content">
-    <div class="wrapper">
+    <div class="wrapper" style="width: 75%;">
         <h2 class="text-center">List of Cuisines</h2>
         <br>
         <a href="add-food.php?id=<?php echo $res_id;?>" class="btn-primary">Add New Item</a>
@@ -26,7 +26,7 @@
                 $result2 = mysqli_query($conn, $sql2);
                 if(mysqli_num_rows($result2) > 0) {
                     while($row = mysqli_fetch_assoc($result2)) {
-                        $id = $row['ID'];
+                        $id = $row['id'];
                         $name = $row['title'];
                         $price = $row['price'];
                         $featured = $row['featured'];
