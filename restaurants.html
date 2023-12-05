@@ -5,9 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurants</title>
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .box-3 {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-3 img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .box-3 .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .box-3:hover img {
+            transform: scale(1.1);
+        }
+
+        .box-3:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h3,
+        .overlay p {
+            margin: 0;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-        <!-- Navbar Section Starts Here -->
+    <!-- Navbar Section Starts Here -->
     <section class="navbar">
         <div class="container">
             <div class="logo">
@@ -43,40 +85,61 @@
         </div>
     </section>
     <!-- Navbar Section Ends Here -->
-       <!-- CAtegories Section Starts Here -->
-       <section class="categories">
+
+    <!-- Restaurant Section Starts Here -->
+    <section class="restaurants">
         <div class="container">
             <h2 class="text-center">Explore Restaurants</h2>
 
-            <a href="category-foods.html">
-            <div class="box-3 float-container">
-                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
+            <!-- Restaurant 1 -->
+            <a href="restaurant-details.html">
+                <div class="box-3 float-container">
+                    <img src="images/burger.jpg" alt="Restaurant 1" class="img-responsive img-curve">
+                    <div class="overlay">
+                        <h3>Restaurant 1</h3>
+                        <p>Description of Restaurant 1 goes here.</p>
+                    </div>
+                </div>
             </a>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
+            <!-- Restaurant 2 -->
+            <a href="restaurant-details.html">
+                <div class="box-3 float-container">
+                    <img src="images/pizza.jpg" alt="Restaurant 2" class="img-responsive img-curve">
+                    <div class="overlay">
+                        <h3>Restaurant 2</h3>
+                        <p>Description of Restaurant 2 goes here.</p>
+                    </div>
+                </div>
             </a>
 
-            <a href="#">
-            <div class="box-3 float-container">
-                <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
+            <!-- Restaurant 3 -->
+            <a href="restaurant-details.html">
+                <div class="box-3 float-container">
+                    <img src="images/momo.jpg" alt="Restaurant 3" class="img-responsive img-curve">
+                    <div class="overlay">
+                        <h3>Restaurant 3</h3>
+                        <p>Description of Restaurant 3 goes here.</p>
+                    </div>
+                </div>
+            </a>
+             <!-- Restaurant 4 -->
+             <a href="restaurant-details.html">
+                <div class="box-3 float-container">
+                    <img src="images/drink.jpg" alt="Restaurant 4" class="img-responsive img-curve">
+                    <div class="overlay">
+                        <h3>Restaurant 4</h3>
+                        <p>Description of Restaurant 4 goes here.</p>
+                    </div>
+                </div>
             </a>
 
             <div class="clearfix"></div>
         </div>
     </section>
-    <!-- Categories Section Ends Here -->
-    <!-- social Section Starts Here -->
+    <!-- Restaurant Section Ends Here -->
+
+    <!-- Social Section Starts Here -->
     <section class="social">
         <div class="container text-center">
             <ul>
@@ -92,15 +155,16 @@
             </ul>
         </div>
     </section>
-    <!-- social Section Ends Here -->
+    <!-- Social Section Ends Here -->
 
-    <!-- footer Section Starts Here -->
+    <!-- Footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
             <p>2023 All Rights Reserved, The Food House.</p>
         </div>
     </section>
-    <!-- footer Section Ends Here -->
+    <!-- Footer Section Ends Here -->
+
     <script src="js/index-script.js"></script>
 </body>
 </html>
