@@ -1,18 +1,43 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\login.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Login Page</title>
+    <style>
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file-input span {
+            display: inline-block;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            margin: 5px;
+        }
+    </style>
 </head>
 
 <body>
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="rest-sup.php" method="POST">
+                <form action="rest-sup.php" method="POST" enctype="multipart/form-data">
                     <h1>Create Restaurant</h1>
                     <?php
                     if (isset($_SESSION['login'])) {
@@ -21,11 +46,15 @@
                     }
                     ?>
                     <br><br>
-                    <input type="text" name="name" placeholder="Restaurent Name" />
-                    <input type="text" name="username" placeholder="Username" />
-                    <input type="password" name="password" placeholder="Password" minlength="8" />
-                    <input type="text" name="address" placeholder="Address" minlength="10" />
-                    <input type="text" name="description" placeholder="Description" minlength="20" />
+                    <input type="text" name="name" placeholder="Restaurant Name" required />
+                    <input type="text" name="username" placeholder="Username" required />
+                    <input type="password" name="password" placeholder="Password" minlength="8" required />
+                    <input type="text" name="address" placeholder="Address" minlength="10" required />
+                    <input type="text" name="description" placeholder="Description" minlength="20" required />
+                    <div class="file-input">
+                        <span id="file-name">Choose Restaurant Image</span>
+                        <input type="file" name="image" accept="image/*" onchange="updateFileName(this)" required />
+                    </div>
                     <button>Sign Up</button>
                 </form>
             </div>
@@ -72,6 +101,12 @@
         </div>
     </section>
     <!-- partial -->
+    <script>
+            function updateFileName(input) {
+                var fileName = input.files[0].name;
+                document.getElementById('file-name').innerHTML = fileName;
+            }
+        </script>
     <script src="js/login.js"></script>
 </body>
 

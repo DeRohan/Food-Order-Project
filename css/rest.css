@@ -11,14 +11,23 @@ body {
 }
 
 .wrapper {
-    padding: 20px;
-    width: 80%;
-    margin: 0 auto;
+    padding: 5px; /* Decrease padding */
+    width: 70%;
+    margin: auto;
     background-color: #fff;
     box-shadow: 0 0 20px rgba(235, 20, 20, 0.516);
     border-radius: 10px;
 }
 
+.footer {
+    background-color: #343a40;
+    color: #0b0b0b;
+    padding: 5px; /* Decrease padding */
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 .text-center {
     text-align: center;
 }
@@ -217,7 +226,7 @@ th {
 .footer {
     background-color: #343a40;
     color: #0b0b0b;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     position: fixed;
     bottom: 0;

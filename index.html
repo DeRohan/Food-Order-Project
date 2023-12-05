@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- Important to make website responsive -->
@@ -16,7 +17,7 @@
         <div class="container">
             <div class="logo">
                 <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+                    <img src="images/tr_logo.png" alt="Restaurant Logo" class="img-responsive">
                 </a>
             </div>
 
@@ -26,16 +27,19 @@
                         <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                        <a href="foods.html">Foods</a>
-                    </li>
-                    <li>
                         <a href="restaurants.html">Restaurants</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="order.html">Order</a>
+                    </li>
+                    <li class="dropdown" onclick="toggleDropdown()">
+                        <a href="#" class="account-link">Account</a>
+                        <ul class="dropdown-content" id="accountDropdown">
+                            <li><a href="#">Edit Details</a></li>
+                            <br>
+                            <li><a href="feedback.html">Feedback</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -233,10 +237,10 @@
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+            <p>2023 All Rights Reserved, The Food House.</p>
         </div>
     </section>
     <!-- footer Section Ends Here -->
-
+    <script src="js/index-script.js"></script>
 </body>
 </html>
