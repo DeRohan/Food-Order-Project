@@ -28,7 +28,7 @@
             background-color: #007bff;
             color: #fff;
             border-radius: 5px;
-            margin: 5px;
+            margin: 8px;
         }
     </style>
 </head>
