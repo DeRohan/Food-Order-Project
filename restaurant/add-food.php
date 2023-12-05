@@ -1,8 +1,4 @@
-<?php include ('partials/menu.php'); 
-    $username = $_GET['username'];
-    $sql = "SELECT * FROM tbl_restaurants where username = '$username'";
-    
-?>
+<?php include ('partials/menu.php'); ?>
 
 <div class="main-content">
     <div class="wrapper">
@@ -12,8 +8,13 @@
                 echo $_SESSION['upload'];
                 unset($_SESSION['upload']);
             }
+            if(isset($_SESSION['add'])) {
+                echo $_SESSION['add'];
+                unset($_SESSION['add']);
+            }
         ?>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <br>
+        <form action="" method="POST" enctype="multipart/form-data" id="statusForm">
             <table class="tbl-30">
                 <tr>
                     <td>Name: </td>
@@ -52,7 +53,7 @@
                                         $id = $row['ID'];
                                         $title = $row['title'];
                                         ?>
-                                        <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
+                                        <option value="<?php echo $title; ?>"><?php echo $title; ?></option>
                                         <?php
                                     }
                                 }
@@ -79,15 +80,76 @@
                         <input type="radio" name="active" value="No"> No
                     </td>
                 </tr>
-                <td padd>
+                <td>
                     <input type="submit" name="submit" value="Add Item" class="btn-primary">
                 </td>
             </table>
         </form>
     </div>
 </div>
-<?php include ('partials/footer.php'); ?>
-
+<?php include('partials/footer.php'); ?>
 <?php 
-
+    if(isset($_POST['submit'])) {
+        $res_id = $_GET['id'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $category = $_POST['category'];
+        if(isset($_POST['featured'])) {
+            $featured = $_POST['featured'];
+        }
+        else {
+            $featured = "No";
+        }
+        if(isset($_POST['active'])) {
+            $active = $_POST['active'];
+        }
+        else {
+            $active = "No";
+        }
+        if(isset($_FILES['image']['name'])) {
+            $image_name = $_FILES['image']['name'];
+            if($image_name != "") {
+                $ext = explode('.', $image_name);
+                $ext = end($ext);
+                $image_name = "Food-Name-".rand(0000, 9999).".".$ext;
+                $source_path = $_FILES['image']['tmp_name'];
+                $destination_path = "images/".$image_name;
+                $upload = move_uploaded_file($source_path, $destination_path);
+                // if($upload == false) {
+                //     $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
+                //     header('location:'.$home_url.'restaurant/add-food.php');
+                //     die();
+                // }
+            }
+        }
+        else {
+            $image_name = "";
+        }
+        //Fetch Category ID
+        $sql_category = "SELECT * FROM tbl_categories WHERE title = '$category'";
+        $result_category = mysqli_query($conn, $sql_category);
+        $data_category = mysqli_fetch_assoc($result_category);
+        $cat_id = $data_category['cat_id'];
+        //Insert Food into the Database
+        $sql = "INSERT INTO tbl_food SET
+            title = '$name',
+            description = '$description',
+            price = '$price',
+            image_name = '$image_name',
+            cat_id = $cat_id,
+            featured = '$featured',
+            active = '$active',
+            res_id = $res_id
+        ";
+        $result = mysqli_query($conn, $sql);
+        if($result == true) {
+            $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
+            header('location:'.$home_url.'restaurant/manage-foods.php');
+        }
+        else {
+            $_SESSION['add'] = "<div class='error'>Failed to Add Food.</div>";
+            header('location:'.$home_url.'restaurant/manage-foods.php');
+        }
+    }
 ?>

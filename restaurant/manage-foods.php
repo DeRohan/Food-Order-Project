@@ -1,10 +1,16 @@
-<?php include ('partials/menu.php'); ?>
+<?php include ('partials/menu.php'); 
+    $username = $_SESSION['restaurant'];
+    $sql = "SELECT * FROM tbl_restaurants WHERE username = '$username' ";
+    $result = mysqli_query($conn, $sql);
+    $data = mysqli_fetch_assoc($result);
+    $res_id = $data['ID'];
+?>
 
 <div class="main-content">
     <div class="wrapper">
         <h2 class="text-center">List of Cuisines</h2>
         <br>
-        <a href="add-food.php?username=<?php echo $username;?>" class="btn-primary">Add New Item</a>
+        <a href="add-food.php?id=<?php echo $res_id;?>" class="btn-primary">Add New Item</a>
         <br><br>
         <table class="tbl-full">
             <th>Name</th>
@@ -15,21 +21,21 @@
             <th>Image</th>
             <th>Actions</th>
             <?php 
-                $username = $_SESSION['restaurant'];
-                $sql = "SELECT * FROM tbl_restaurants WHERE username = '$username' ";
-                $result = mysqli_query($conn, $sql);
-                $data = mysqli_fetch_assoc($result);
-                $res_id = $data['ID'];
+
                 $sql2 = "SELECT * FROM tbl_food WHERE res_id = '$res_id'";
                 $result2 = mysqli_query($conn, $sql2);
                 if(mysqli_num_rows($result2) > 0) {
                     while($row = mysqli_fetch_assoc($result2)) {
                         $id = $row['ID'];
-                        $name = $row['name'];
+                        $name = $row['title'];
                         $price = $row['price'];
                         $featured = $row['featured'];
                         $active = $row['active'];
-                        $category = $row['category_id'];
+                        $category = $row['cat_id'];
+                        $cat_sql = "SELECT title FROM tbl_categories where cat_id = $category";
+                        $cat_result = mysqli_query($conn, $cat_sql);
+                        $cat_row = mysqli_fetch_assoc($cat_result);
+                        $category = $cat_row['title'];
                         $image_name = $row['image_name'];
                         ?>
                         <tr>
@@ -44,8 +50,9 @@
                                         echo "<div class='error'>Image Not Added.</div>";
                                     }
                                     else {
-                                        ?>
-                                        <img src="../images/<?php echo $image_name; ?>" width="100px">
+                                        
+                                        echo $image_name;?>
+                                        <!-- <img src="../images/<?php echo $image_name; ?>" width="100px"> -->
                                         <?php
                                     }
                                 ?>

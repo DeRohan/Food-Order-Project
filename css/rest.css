@@ -101,7 +101,7 @@ th {
 .btn-secondary {
     background-color: #28a745;
     color: #fff;
-    padding: 12px 20px;
+    padding: 8px 15px;
     margin: 20px -200px 8px 0 !important; /* Add margin to the right */
     border: 2px solid #28a745;
     border-radius: 12px;
@@ -119,7 +119,7 @@ th {
     background-color: #dc3545;
     color: #fff;
     padding: 12px 20px;
-    margin-left: 225px;
+    /* margin-left: 225px; */
     border: 2px solid #dc3545;
     border-radius: 12px;
     text-decoration: none;

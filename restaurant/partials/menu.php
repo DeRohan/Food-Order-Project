@@ -1,6 +1,6 @@
 <?php 
     include('../config/connect.php'); 
-   // include('login-check.php'); 
+    include('login-check.php'); 
 ?>
 
 <html>
@@ -25,6 +25,9 @@
                     </li>
                     <li>
                         <a href="manage-orders.php">Orders</a>
+                    </li>
+                    <li>
+                        <a href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
