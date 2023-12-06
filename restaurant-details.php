@@ -36,12 +36,25 @@ if(isset($_GET['id'])) {
 <section class="food-menu">
     <div class="container">
         <h2 class="text-center">Food Menu</h2>
+        <?php 
+            if(isset($_SESSION['cart'])) {
+                ?>
+                <br>
+                <?php
+                    echo $_SESSION['cart'];
+                    unset($_SESSION['cart']);
+                ?>
+                <br>
+                <?php
+            }
+        ?>
         <?php
         $foods = "SELECT * FROM tbl_food WHERE res_id = $id AND active = 'Yes'";
         $result = mysqli_query($conn, $foods);
         $count = mysqli_num_rows($result);
         if($count > 0) {
             while($row = mysqli_fetch_assoc($result)) {
+                $f_id = $row['id'];
                 $f_title = $row['title'];
                 $f_price = $row['price'];
                 $f_desc = $row['description'];
@@ -60,7 +73,7 @@ if(isset($_GET['id'])) {
                         </p>
                         <br>
 
-                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="order.php?id=<?php echo $f_id;?>" class="btn btn-primary">Order Now</a>
                     </div>
                 <?php
             }

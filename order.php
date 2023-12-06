@@ -1,53 +1,48 @@
-<?php include ('partials-usr/menu.php');
-        include ('partials-usr/login-check.php');
+<?php
+    include ('partials-usr/login-check.php');
+    include ('config/connect.php');
+
+    if(isset($_GET['id'])) {
+        $f_id = $_GET['id'];
+        $sql = "SELECT * FROM tbl_food WHERE id = $f_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $f_title = $row['title'];
+        $res_id = $row['res_id'];
+        $check_cart = "SELECT  * FROM tbl_cart WHERE res_id != $res_id";
+        $res_check = mysqli_query($conn, $check_cart);
+        if(mysqli_num_rows($res_check) > 0) {
+            $_SESSION['cart'] = "<div class='error'>You can only order from one restaurant at a time.</div>";
+            header("location:".$home_url."restaurants.php");
+            //die();
+        } 
+        else {
+            $check_item = "SELECT * FROM tbl_cart WHERE item_id = $f_id";
+            $res_item = mysqli_query($conn, $check_item);
+            if(mysqli_num_rows($res_item) > 0) {
+                $item_row = mysqli_fetch_assoc($res_item);
+                $quantity = $item_row['quantity'] + 1;
+                $sql2 = "UPDATE tbl_cart SET
+                    quantity = $quantity
+                    WHERE item_id = $f_id";
+            }
+            else {
+                $quantity = 1;
+                $sql2 = "INSERT INTO tbl_cart SET
+                cart_id = 1,
+                item_id = $f_id,
+                res_id = $res_id,
+                quantity = $quantity
+                ";
+            }
+            $result2 = mysqli_query($conn, $sql2);
+            if($result2 == true) {
+                $_SESSION['cart'] = "<div class='success'>Food Added to Cart.</div>";
+                header("location:".$home_url."cart.php");
+            } else {
+                $_SESSION['cart'] = "<div class='error'>Failed to Add Food.</div>";
+                header("location:".$home_url."cart.php");
+            }
+        }
+    }
 ?>
-
-    <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search">
-        <div class="container">
-            
-            <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
-
-            <form action="#" class="order">
-                <fieldset>
-                    <legend>Selected Food</legend>
-
-                    <div class="food-menu-img">
-                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                    </div>
-    
-                    <div class="food-menu-desc">
-                        <h3>Food Title</h3>
-                        <p class="food-price">$2.3</p>
-
-                        <div class="order-label">Quantity</div>
-                        <input type="number" name="qty" class="input-responsive" value="1" required>
-                        
-                    </div>
-
-                </fieldset>
-                
-                <fieldset>
-                    <legend>Delivery Details</legend>
-                    <div class="order-label">Full Name</div>
-                    <input type="text" name="full-name" placeholder="E.g. Vijay Thapa" class="input-responsive" required>
-
-                    <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
-
-                    <div class="order-label">Email</div>
-                    <input type="email" name="email" placeholder="E.g. hi@vijaythapa.com" class="input-responsive" required>
-
-                    <div class="order-label">Address</div>
-                    <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
-
-                    <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
-                </fieldset>
-
-            </form>
-
-        </div>
-    </section>
-    <!-- fOOD sEARCH Section Ends Here -->
-
-<?php include ('partials-usr/footer.php');?>

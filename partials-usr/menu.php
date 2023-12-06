@@ -52,7 +52,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" onclick="toggleCart()">Cart</a>
+                        <a href="<?php echo $home_url;?>cart.php" onclick="toggleCart()">Cart</a>
                     </li>
                 </ul>
             </div>

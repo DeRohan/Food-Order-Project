@@ -16,6 +16,10 @@
         echo $_SESSION['no-login'];
         unset($_SESSION['no-login']);
     }
+    if(isset($_SESSION['order'])) {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
 ?>
 <!-- CAtegories Section Starts Here -->
 <section class="categories">
@@ -71,7 +75,7 @@
         $count = mysqli_num_rows($result2);
         if($count > 0) {
             while($row = mysqli_fetch_assoc($result2)) {
-                $f_id = $row['food_id'];
+                $f_id = $row['id'];
                 $f_title = $row['title'];
                 $f_price = $row['price'];
                 $f_desc = $row['description'];
@@ -95,7 +99,7 @@
                         </p>
                         <br>
 
-                        <a href="order.php" class="btn btn-primary">Order Now</a>
+                        <a href="order.php?id=<?php echo $f_id;?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
                 <?php
