@@ -20,6 +20,18 @@
     </div>
     <div class="login-options-container">
         <h1>Login Options</h1>
+        <?php 
+            if(isset($_SESSION['login'])) {
+                ?>
+                <br>
+                <?php
+                echo $_SESSION['login'];
+                unset($_SESSION['login']);
+                ?>
+                <br>
+                <?php
+            }
+        ?>
         <button onclick="redirectToCustomerLogin()">Customer Login</button>
         <button onclick="redirectToRestaurantLogin()">Restaurant Login</button>
     </div>

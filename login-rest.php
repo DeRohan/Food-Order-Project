@@ -53,7 +53,7 @@
                     <input type="text" name="description" placeholder="Description" minlength="20" required />
                     <div class="file-input">
                         <span id="file-name">Choose Restaurant Image</span>
-                        <input type="file" name="image" accept="image/*" onchange="updateFileName(this)" required />
+                        <input type="file" name="image" accept="image/*" onchange="updateFileName(this)" />
                     </div>
                     <button>Sign Up</button>
                 </form>

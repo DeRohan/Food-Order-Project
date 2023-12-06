@@ -13,7 +13,7 @@
         }
         else {
             $_SESSION['login'] = "<div class='error'>Username or Password Did not Match :(</div>";
-            header('location:'.$home_url.'select-option.html');
+            header('location:'.$home_url.'select-option.php');
         }
 
     }
