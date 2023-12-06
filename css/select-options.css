@@ -22,7 +22,7 @@ body {
 }
 
 .login-options-container button {
-    background-color: #ff6b81; /* Green button color */
+    background-color: #ff6b81; /* button color */
     color: white;
     padding: 14px 30px; /* Increased padding for spacing */
     margin: 8px 10px; /* Added margin for spacing */
@@ -35,7 +35,7 @@ body {
 }
 
 .login-options-container button:hover {
-    background-color: #ff4757 /* Darker green color on hover */
+    background-color: #ff4757 /* Darker color on hover */
 }
 
 .set {
