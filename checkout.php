@@ -2,7 +2,8 @@
     include ('config/connect.php');
     include ('partials-usr/login-check.php');
 
-    $payment = $_POST['payment'];
+    // $payment = $_POST['payment'];
+    $payment = "Cash on Delivery";
     $user_id = $_SESSION['customer'];
     $sql = "SELECT * FROM tbl_cart";
     $result = mysqli_query($conn, $sql);
@@ -56,7 +57,7 @@
                 order_id = $current_order,
                 amount = $total_amount,
                 method = '$payment',
-                tr_date = '$ord_date'
+                tr_date = '$ord_date',
                 status = 'Paid'
             ";
             $res_tr = mysqli_query($conn, $sql_tr);

@@ -4,9 +4,7 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <table class="tbl-full">
-            
-        </table>
+        <table class="tbl-full"></table>
     </div>
 </div>
 
