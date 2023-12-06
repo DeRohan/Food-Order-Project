@@ -29,6 +29,9 @@
                     <li>
                         <a href="<?php echo $home_url;?>restaurants.php">Restaurants</a>
                     </li>
+                    <li>
+                        <a href="<?php echo $home_url;?>cart.php" onclick="toggleCart()">Cart</a>
+                    </li>
                     <li class="dropdown" onclick="toggleDropdown()">
                         <a href="#" class="account-link">Account</a>
                         <ul class="dropdown-content" id="accountDropdown">
@@ -50,9 +53,6 @@
                                 ?>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="<?php echo $home_url;?>cart.php" onclick="toggleCart()">Cart</a>
                     </li>
                 </ul>
             </div>
