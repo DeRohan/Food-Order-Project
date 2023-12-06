@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include('partials-usr/menu.php') ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -50,7 +51,7 @@
 </head>
 <body>
     <!-- Navbar Section Starts Here -->
-    <section class="navbar">
+    <!-- <section class="navbar">
         <div class="container">
             <div class="logo">
                 <a href="#" title="Logo">
@@ -83,8 +84,18 @@
 
             <div class="clearfix"></div>
         </div>
-    </section>
+    </section> -->
     <!-- Navbar Section Ends Here -->
+    <section class="food-search text-center">
+        <div class="container">
+            
+            <form action="food-search.php" method="POST">
+                <input type="search" name="search" placeholder="Search for Restaurant.." required>
+                <input type="submit" name="submit" value="Search" class="btn btn-primary">
+            </form>
+
+        </div>
+    </section>
 
     <!-- Restaurant Section Starts Here -->
     <section class="restaurants">
