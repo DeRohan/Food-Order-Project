@@ -49,10 +49,7 @@
             Description = '$description',
             image_name = '$image_name'
             ";
-            echo "query time";
-            echo $username, $password, $r_name, $address, $description, $image_name;
         $result = mysqli_query($conn, $sql);
-        echo "query works";
         if($result==true) {
             $current_id = mysqli_insert_id($conn);
             $curr_date = date('Y-m-d');
@@ -60,9 +57,7 @@
                 restaurant_id = $current_id,
                 registration_date = '$curr_date';
             ";
-            echo "2nd query";
             $result2 = mysqli_query($conn, $sql2);
-            echo "2nd works";
             if($result2){
                 $_SESSION['login'] = "<div class='success'>Restaurant Created Succesfully!</div>";
                 header("location:" .$home_url.'restaurant/index.php');

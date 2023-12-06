@@ -10,23 +10,23 @@
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form action="usr-sup.php" method="POST">
                     <h1>Create Account</h1>
-                    <input type="text" placeholder="First Name" />
-                    <input type="text" placeholder="Last Name" />
-                    <input type="text" placeholder="Username" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <input type="tel" placeholder="Phone Number" maxlength="11" />
-                    <input type="text" placeholder="Address" minlength="20" />
+                    <input type="text" name="fname" placeholder="First Name" required/>
+                    <input type="text" name="lname" placeholder="Last Name" required/>
+                    <input type="text" name="username" placeholder="Username" required/>
+                    <input type="email" name="email" placeholder="Email" required/>
+                    <input type="password" name="pwd" placeholder="Password" required/>
+                    <input type="tel" name="pno" placeholder="Phone Number (03xxxxxxxxx)" maxlength="11" required/>
+                    <input type="text" name="address" placeholder="Address" minlength="20" required/>
                     <button>Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="#">
+                <form action="usr-sin.php" method="POST">
                     <h1>Sign in</h1>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
+                    <input type="text" name="email" placeholder="Email/Username" />
+                    <input type="password" name="pwd" placeholder="Password" />
                     <a href="#">Forgot your password?</a>
                     <button>Sign In</button>
                 </form>

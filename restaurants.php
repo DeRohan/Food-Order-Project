@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php include('partials-usr/menu.php') ?>
+<?php include('partials-usr/menu.php') 
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -77,7 +79,7 @@
                         $description = $row['Description'];
                         $image_name = $row['image_name'];
                         ?>
-                            <a href="restaurant-details.php">
+                            <a href="restaurant-details.php?id=<?php echo $id;?>">
                                 <div class="box-3 float-container">
                                     <?php
                                     if($image_name===NULL) {

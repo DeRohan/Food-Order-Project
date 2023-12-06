@@ -42,7 +42,15 @@
                             <li><a href="#">Edit Details</a></li>
                             <br>
                             <li><a href="<?php echo $home_url; ?>feedback.php">Feedback</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li>
+                                <?php 
+                                    if(isset($_SESSION['customer'])) {
+                                        echo '<a href="'.$home_url.'usr-sout.php">Sign Out</a>';
+                                    } else {
+                                        echo '<a href="'.$home_url.'select-option.php">Login/Sign Up</a>';
+                                    }
+                                ?>
+                            </li>
                         </ul>
                     </li>
                 </ul>

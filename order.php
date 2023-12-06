@@ -1,4 +1,6 @@
-<?php include ('partials-usr/menu.php');?>
+<?php include ('partials-usr/menu.php');
+        include ('partials-usr/login-check.php');
+?>
 
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search">
