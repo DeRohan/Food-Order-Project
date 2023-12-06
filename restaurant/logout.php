@@ -1,5 +1,5 @@
 <?php 
     include ('../config/connect.php');
-    session_destroy();
+    unset($_SESSION['restaurant']);
     header("location:".$home_url."/select-option.php")
 ?>

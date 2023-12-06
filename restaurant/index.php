@@ -6,9 +6,9 @@
                 <h1>Dashboard</h1>
                 <br><br>
                 <?php
-                    if(isset($_SESSION['login'])) {
-                        echo $_SESSION['login'];
-                        unset($_SESSION['login']);
+                    if(isset($_SESSION['login-rest'])) {
+                        echo $_SESSION['login-rest'];
+                        unset($_SESSION['login-rest']);
                     }
                 ?>
                 <div class="col-4 text-center">
