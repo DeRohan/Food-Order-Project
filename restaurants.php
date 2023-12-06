@@ -105,42 +105,13 @@
             <!-- Restaurant 1 -->
             <a href="restaurant-details.php">
                 <div class="box-3 float-container">
+                    <?php 
+                        
+                    ?>
                     <img src="images/burger.jpg" alt="Restaurant 1" class="img-responsive img-curve">
                     <div class="overlay">
                         <h3>Restaurant 1</h3>
                         <p>Description of Restaurant 1 goes here.</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Restaurant 2 -->
-            <a href="restaurant-details.php">
-                <div class="box-3 float-container">
-                    <img src="images/pizza.jpg" alt="Restaurant 2" class="img-responsive img-curve">
-                    <div class="overlay">
-                        <h3>Restaurant 2</h3>
-                        <p>Description of Restaurant 2 goes here.</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Restaurant 3 -->
-            <a href="restaurant-details.php">
-                <div class="box-3 float-container">
-                    <img src="images/momo.jpg" alt="Restaurant 3" class="img-responsive img-curve">
-                    <div class="overlay">
-                        <h3>Restaurant 3</h3>
-                        <p>Description of Restaurant 3 goes here.</p>
-                    </div>
-                </div>
-            </a>
-             <!-- Restaurant 4 -->
-             <a href="restaurant-details.php">
-                <div class="box-3 float-container">
-                    <img src="images/drink.jpg" alt="Restaurant 4" class="img-responsive img-curve">
-                    <div class="overlay">
-                        <h3>Restaurant 4</h3>
-                        <p>Description of Restaurant 4 goes here.</p>
                     </div>
                 </div>
             </a>
