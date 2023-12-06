@@ -19,7 +19,7 @@
         }
 
         header {
-            background-color: #333;
+           
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -66,6 +66,7 @@
     </style>
 </head>
 <body>
+<section class="food-search">
     <header>
         <h1>Shopping Cart</h1>
     </header>
@@ -98,6 +99,7 @@
 
         <button action="checkout.php" class="checkout-btn">Proceed to Checkout</button>
     </div>
+    </section>
 </body>
 </html>
 
