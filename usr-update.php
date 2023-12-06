@@ -29,14 +29,16 @@
             ";
             $save = mysqli_query($conn, $update_data);
             if($save==true) {
+                $isEditing = false;
                 $_SESSION['update'] = "<div class='success'>User Details Updated Successfully! :D</div>";
                 header("location:" .$home_url.'usr-update.php');
             }
             else{
+                $isEditing = false;
                 $_SESSION['update'] = "<div class='error'>Failed to Update User Details! :(</div>";
                 header("location:" .$home_url.'usr-update.php');
             }
-            $isEditing = false;
+            
         }
     }
 ?>
