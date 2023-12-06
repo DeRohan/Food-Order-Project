@@ -12,22 +12,65 @@
                     }
                 ?>
                 <div class="col-4 text-center">
-                    <h1>5</h1>
+                    <?php
+                        $sql = "SELECT * FROM tbl_categories";
+                        $res = mysqli_query($conn, $sql);
+                        $count = mysqli_num_rows($res);
+
+                    ?>
+                    <h1><?php echo $count;?></h1>
                     <br>
-                    Categories
+                    Total Categories
+                    <br>
                 </div>
                 <div class="col-4 text-center">
-                    <h1>5</h1>
+                <?php
+                        $sql = "SELECT * FROM tbl_restaurants";
+                        $res = mysqli_query($conn, $sql);
+                        $count = mysqli_num_rows($res);
+
+                    ?>
+                    <h1><?php echo $count;?></h1>
                     <br>
                     Restaurants
                 </div>
                 <div class="col-4 text-center">
-                    <h1>5</h1>
+                <?php
+                        $sql = "SELECT * FROM tbl_users ";
+                        $res = mysqli_query($conn, $sql);
+                        $count = mysqli_num_rows($res);
+
+                    ?>
+                    <h1><?php echo $count;?></h1>
                     <br>
                     Users
                 </div>
                 <div class="col-4 text-center">
-                    <h1>5</h1>
+                <?php
+                        $sql = "SELECT * FROM tbl_orders ";
+                        $res = mysqli_query($conn, $sql);
+                        $count = mysqli_num_rows($res);
+
+                    ?>
+                    <h1><?php echo $count;?></h1>
+                    <br>
+                    Total Orders
+                </div>
+                <div class="col-4 text-center">
+                    <?php 
+                        $sql4 = "SELECT SUM(tr.amount) as Total FROM tbl_transactions tr
+                                INNER JOIN tbl_orders ord on tr.order_id = ord.order_id
+                                WHERE ord.status = 'Delivered'";
+                        $res4 = mysqli_query($conn, $sql4);
+                        $row4 = mysqli_fetch_assoc($res4);
+                        if($row4['Total'] > 0) {
+                            $total = $row4['Total'];
+                        }
+                        else{
+                            $total = 0;
+                        }
+                    ?>
+                    <h1><?php echo $total;?></h1>
                     <br>
                     Revenue Generated
                 </div>
