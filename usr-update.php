@@ -2,27 +2,40 @@
     include ('partials-usr/menu.php');
     include ('partials-usr/login-check.php');
 
-    // Dummy user data for testing
-    $userData = array(
-        'first_name' => 'John',
-        'last_name' => 'Doe',
-        'username' => 'john_doe',
-        'email' => 'john.doe@example.com',
-        'password' => '********',  // Displaying the password is not recommended; this is just for demonstration
-        'address' => '123 Main St, Cityville'
-    );
-
-    $isEditing = false;
+    $id = $_SESSION['customer'];
+    $sql = "SELECT * FROM tbl_users WHERE user_id = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $userData = mysqli_fetch_assoc($result);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if the form is submitted for editing
         if (isset($_POST['edit_details'])) {
             $isEditing = true;
-        } elseif (isset($_POST['save_changes'])) {
-            // Handle form submission for updating user details
-            // Update the database with the new user details
-            // You can add validation and sanitization as needed
-            // Redirect or display a success message after updating
+        } 
+        elseif (isset($_POST['save_changes'])) {
+            $fname = $_POST['first_name'];
+            $lname = $_POST['last_name'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $address = $_POST['address'];
+            
+            $update_data = "UPDATE tbl_users SET
+                F_Name = '$fname',
+                L_Name = '$lname',
+                username = '$username',
+                email = '$email',
+                address = '$address'
+                WHERE user_id = '$id'
+            ";
+            $save = mysqli_query($conn, $update_data);
+            if($save==true) {
+                $_SESSION['update'] = "<div class='success'>User Details Updated Successfully! :D</div>";
+                header("location:" .$home_url.'usr-update.php');
+            }
+            else{
+                $_SESSION['update'] = "<div class='error'>Failed to Update User Details! :(</div>";
+                header("location:" .$home_url.'usr-update.php');
+            }
             $isEditing = false;
         }
     }
@@ -99,11 +112,18 @@
         <?php if (!$isEditing): ?>
             <!-- Display user details -->
             <h2 class="custom-heading">User Details</h2>
-            <p class="custom-paragraph"><strong>First Name:</strong> <?php echo $userData['first_name']; ?></p>
-            <p class="custom-paragraph"><strong>Last Name:</strong> <?php echo $userData['last_name']; ?></p>
+            <br>
+            <?php 
+                if(isset($_SESSION['update'])) {
+                    echo $_SESSION['update'];
+                    unset($_SESSION['update']);
+                }
+            ?>
+            <br><br>
+            <p class="custom-paragraph"><strong>First Name:</strong> <?php echo $userData['F_Name']; ?></p>
+            <p class="custom-paragraph"><strong>Last Name:</strong> <?php echo $userData['L_Name']; ?></p>
             <p class="custom-paragraph"><strong>Username:</strong> <?php echo $userData['username']; ?></p>
             <p class="custom-paragraph"><strong>Email:</strong> <?php echo $userData['email']; ?></p>
-            <p class="custom-paragraph"><strong>Password:</strong> <?php echo $userData['password']; ?></p>
             <p class="custom-paragraph"><strong>Address:</strong> <?php echo $userData['address']; ?></p>
 
             <!-- Button to initiate editing -->
@@ -115,19 +135,16 @@
             <h2 class="custom-heading">Edit User Details</h2>
             <form action="" method="POST">
                 <label for="first_name" class="custom-label">First Name:</label>
-                <input type="text" name="first_name" value="<?php echo $userData['first_name']; ?>" class="custom-input" required>
+                <input type="text" name="first_name" value="<?php echo $userData['F_Name']; ?>" class="custom-input" required>
 
                 <label for="last_name" class="custom-label">Last Name:</label>
-                <input type="text" name="last_name" value="<?php echo $userData['last_name']; ?>" class="custom-input" required>
+                <input type="text" name="last_name" value="<?php echo $userData['L_Name']; ?>" class="custom-input" required>
 
                 <label for="username" class="custom-label">Username:</label>
                 <input type="text" name="username" value="<?php echo $userData['username']; ?>" class="custom-input" required>
 
                 <label for="email" class="custom-label">Email:</label>
                 <input type="email" name="email" value="<?php echo $userData['email']; ?>" class="custom-input" required>
-
-                <label for="password" class="custom-label">Password:</label>
-                <input type="password" name="password" value="<?php echo $userData['password']; ?>" class="custom-input" required>
 
                 <label for="address" class="custom-label">Address:</label>
                 <textarea name="address" class="custom-textarea" required><?php echo $userData['address']; ?></textarea>
