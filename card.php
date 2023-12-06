@@ -1,177 +1,208 @@
-<?php include('partials-usr/menu.php'); ?>
+<?php
+    include('partials-usr/menu.php');
+    include('partials-usr/login-check.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fancy Form</title>
     <style>
-        /* Unique Form Styles */
-        .fancy-body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+        /* Add your existing styles here */
 
-        .fancy-form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        .fancy-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .fancy-input {
-            width: 100%;
+        /* Style for input fields in the credit card form */
+        .custom-input-credit-card {
+            width: calc(100% - 18px);
             padding: 8px;
-            margin-bottom: 16px;
+            margin-top: 5px;
+            margin-bottom: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .fancy-button {
-            background-color: #4caf50;
-            color: #fff;
+        /* Style for the credit card form container */
+        .credit-card-form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white; /* Original color */
+            border-radius: 10px; /* Soft edges */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        /* Style for the container of expiry date and CVV */
+        .expiry-cvv-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Center vertically */
+        }
+
+        /* Style for expiry date and CVV inputs */
+        .expiry-input,
+        .cvv-input {
+            width: 48%;
+        }
+
+        /* Add space between CVV and Expiry Date */
+        .cvv-input {
+            margin-right: 10px;
+        }
+
+        /* Style for the Confirm Payment button */
+        .confirm-payment-button {
+            background-color: #F76D7C; /* Watermelon color */
+            color: white;
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            display: block; /* Centering adjustment */
+            margin: 0 auto; /* Centering adjustment */
         }
 
-        .fancy-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Table Styles */
-        .fancy-table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        .fancy-table th, .fancy-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .fancy-table th {
-            background-color: #4caf50;
-            color: #fff;
+        .confirm-payment-button:hover {
+            background-color: #D65A6F; /* Darker shade on hover */
         }
     </style>
-</head>
-<body class="fancy-body">
-    <form class="fancy-form">
-        <label class="fancy-label" for="fancy-name">Fancy Full Name:</label>
-        <input class="fancy-input" type="text" id="fancy-name" name="fancy-name" required>
 
-        <label class="fancy-label" for="fancy-expiryDate">Fancy Expiry Date (YYYY-MM-DD):</label>
-        <input class="fancy-input" type="text" id="fancy-expiryDate" name="fancy-expiryDate" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}" oninput="formatDateInput(this)" onkeydown="handleBackspace(this)" required>
-
-        <label class="fancy-label" for="fancy-nicNumber">Fancy NIC Number (XXX-XXX-XXX-XXXX-XXXX):</label>
-        <input class="fancy-input" type="text" id="fancy-nicNumber" name="fancy-nicNumber" placeholder="XXX-XXX-XXX-XXXX-XXXX" pattern="\d{3}-\d{3}-\d{3}-\d{4}-\d{4}" oninput="formatNicInput(this)" onkeydown="handleBackspace(this)" required>
-
-        <label class="fancy-label" for="fancy-threeDigitInput">Fancy 3-Digit Input (X-Y-Z):</label>
-        <input class="fancy-input" type="text" id="fancy-threeDigitInput" name="fancy-threeDigitInput" placeholder="X-Y-Z" pattern="\d-\d-\d" oninput="formatThreeDigitInput(this)" onkeydown="handleBackspace(this)" required>
-
-        <button class="fancy-button" type="submit">Submit</button>
-    </form>
-
-    <!-- Display Table -->
-    <table class="fancy-table" id="resultTable">
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Expiry Date</th>
-                <th>NIC Number</th>
-                <th>3-Digit Input</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Table rows will be dynamically added here -->
-        </tbody>
-    </table>
-
-    <script>
-        function formatDateInput(input) {
-            let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-            if (value.length > 8) {
-                value = value.substring(0, 8);
-            }
-            if (value.length >= 4) {
-                value = value.substring(0, 4) + '-' + value.substring(4, 6) + '-' + value.substring(6);
-            }
-            input.value = value;
-        }
-
-        function formatNicInput(input) {
-            let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to format card number as xxx-xxx-xxx-xxx-xxxx
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\D/g, '');
 
             if (value.length > 16) {
-                value = value.substring(0, 16);
+                value = value.slice(0, 16);
             }
 
-            if (value.length >= 3 && value.length < 6) {
-                value = value.substring(0, 3) + '-' + value.substring(3);
-            } else if (value.length >= 6 && value.length < 9) {
-                value = value.substring(0, 3) + '-' + value.substring(3, 6) + '-' + value.substring(6);
-            } else if (value.length >= 9 && value.length < 12) {
-                value = value.substring(0, 3) + '-' + value.substring(3, 6) + '-' + value.substring(6, 9) + '-' + value.substring(9);
-            } else if (value.length >= 12) {
-                value = value.substring(0, 3) + '-' + value.substring(3, 6) + '-' + value.substring(6, 9) + '-' + value.substring(9, 12) + '-' + value.substring(12);
-            }
-
-            input.value = value;
-        }
-
-        function formatThreeDigitInput(input) {
-            let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-            if (value.length > 3) {
-                value = value.substring(0, 3);
-            }
-            if (value.length >= 2) {
-                value = value.substring(0, 1) + '-' + value.substring(1, 2) + '-' + value.substring(2);
-            }
-            input.value = value;
-        }
-
-        function handleBackspace(input) {
-            if (event.key === 'Backspace') {
-                let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-                input.value = value.substring(0, value.length - 1);
-                // Trigger the respective formatting function based on the input ID
-                switch (input.id) {
-                    case 'fancy-expiryDate':
-                        formatDateInput(input);
-                        break;
-                    case 'fancy-nicNumber':
-                        formatNicInput(input);
-                        break;
-                    case 'fancy-threeDigitInput':
-                        formatThreeDigitInput(input);
-                        break;
-                    default:
-                        break;
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += '-';
                 }
-                event.preventDefault(); // Prevent the default backspace behavior
+                formattedValue += value[i];
             }
+
+            input.value = formattedValue;
         }
-    </script>
-</body>
-</html>
+
+        // Function to format CVV as x-x-x
+        function formatCVV(input) {
+            let value = input.value.replace(/\D/g, '');
+
+            if (value.length > 3) {
+                value = value.slice(0, 3);
+            }
+
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+
+            input.value = formattedValue;
+        }
+
+        // Function to format expiry date as YYYY-MM-DD
+        function formatExpiryDate(input) {
+            let value = input.value.replace(/\D/g, '');
+
+            if (value.length > 8) {
+                value = value.slice(0, 8);
+            }
+
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i === 4 || i === 6) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+
+            input.value = formattedValue;
+        }
+
+        // Event listener for card number input
+        const cardNumberInput = document.querySelector('input[name="card_number"]');
+        cardNumberInput.addEventListener('input', function () {
+            formatCardNumber(this);
+        });
+
+        // Prevent removing hyphens manually
+        cardNumberInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && (this.selectionStart === this.selectionEnd)) {
+                if (this.selectionStart % 5 === 0) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Event listener for CVV input
+        const cvvInput = document.querySelector('input[name="cvv"]');
+        cvvInput.addEventListener('input', function () {
+            formatCVV(this);
+        });
+
+        // Prevent removing hyphens manually for CVV
+        cvvInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && (this.selectionStart === this.selectionEnd)) {
+                if (this.selectionStart % 2 === 0) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Event listener for expiry date input
+        const expiryDateInput = document.querySelector('input[name="expiry_date"]');
+        expiryDateInput.addEventListener('input', function () {
+            formatExpiryDate(this);
+        });
+
+        // Allow backspacing hyphens manually for expiry date
+        expiryDateInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && (this.selectionStart === this.selectionEnd)) {
+                if (this.selectionStart === 7 || this.selectionStart === 5) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+
+<section class="food-search">
+    <div class="custom-container credit-card-form-container">
+        <!-- Form for editing credit card details -->
+        <h2 class="custom-heading">Credit Card Details</h2>
+        <form action="" method="POST">
+            <label for="card_name" class="custom-label">Cardholder's Name</label>
+            <input type="text" name="card_name" value="" class="custom-input-credit-card" required>
+
+            <label for="card_number" class="custom-label">Card Number</label>
+            <input type="text" name="card_number" value="" class="custom-input-credit-card" required>
+
+            <!-- Container for Expiry Date and CVV -->
+            <div class="expiry-cvv-container">
+                <!-- CVV -->
+                <label for="cvv" class="custom-label">CVV</label>
+                <input type="text" name="cvv" value="" class="custom-input-credit-card cvv-input" required>
+
+                <!-- Expiry Date -->
+                <label for="expiry_date" class="custom-label">Expiry Date</label>
+                <input type="text" name="expiry_date" value="" class="custom-input-credit-card expiry-input" placeholder="YYYY-MM-DD" required>
+            </div>
+
+            <!-- Confirm Payment button -->
+            <button type="submit" name="confirm_payment" class="confirm-payment-button">Confirm Payment</button>
+        </form>
+    </div>
+</section>
 
 <?php include('partials-usr/footer.php'); ?>
+</body>
+</html>
