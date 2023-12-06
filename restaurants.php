@@ -50,42 +50,6 @@
     </style>
 </head>
 <body>
-    <!-- Navbar Section Starts Here -->
-    <!-- <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/tr_logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
-
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.php">Home</a>
-                    </li>
-                    <li>
-                        <a href="restaurants.php">Restaurants</a>
-                    </li>
-                    <li>
-                        <a href="order.php">Order</a>
-                    </li>
-                    <li class="dropdown" onclick="toggleDropdown()">
-                        <a href="#" class="account-link">Account</a>
-                        <ul class="dropdown-content" id="accountDropdown">
-                            <li><a href="#">Edit Details</a></li>
-                            <br>
-                            <li><a href="feedback.php">Feedback</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-    </section> -->
-    <!-- Navbar Section Ends Here -->
     <section class="food-search text-center">
         <div class="container">
             
@@ -101,20 +65,43 @@
     <section class="restaurants">
         <div class="container">
             <h2 class="text-center">Explore Restaurants</h2>
+            <?php 
+                $sql = "SELECT * FROM tbl_restaurants";
+                $result = mysqli_query($conn, $sql);
+                $count = mysqli_num_rows($result);
 
-            <!-- Restaurant 1 -->
-            <a href="restaurant-details.php">
-                <div class="box-3 float-container">
-                    <?php 
-                        
-                    ?>
-                    <img src="images/burger.jpg" alt="Restaurant 1" class="img-responsive img-curve">
-                    <div class="overlay">
-                        <h3>Restaurant 1</h3>
-                        <p>Description of Restaurant 1 goes here.</p>
-                    </div>
-                </div>
-            </a>
+                if($count > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $id = $row['ID'];
+                        $title = $row['Name'];
+                        $description = $row['Description'];
+                        $image_name = $row['image_name'];
+                        ?>
+                            <a href="restaurant-details.php">
+                                <div class="box-3 float-container">
+                                    <?php
+                                    if($image_name===NULL) {
+                                        ?>
+                                        <img src="<?php echo $home_url; ?>images/restaurant/restaurant_default.jpg" alt="Restaurant Image" class="img-responsive img-curve">
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <img src="<?php echo $home_url;?>images/restaurant/<?php echo $image_name;?>" alt="Restaurant Image" class="img-responsive img-curve">
+                                        <?php
+                                    }
+                                    ?>
+                                    <div class="overlay">
+                                        <h3> <?php echo $title; ?></h3>
+                                        <p> <?php echo $description; ?></p>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php
+                    }
+                }
+            ?>
+
 
             <div class="clearfix"></div>
         </div>

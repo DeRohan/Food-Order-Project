@@ -23,11 +23,11 @@
                 }
             }
             else{
-                $image_name = NULL;
+                $image_name = "";
             }
         }
         else{
-            $image_name = NULL;
+            $image_name = "restaurant_default.jpg";
         }
 
         $check = "SELECT * FROM tbl_restaurants";
