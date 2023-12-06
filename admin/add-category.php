@@ -73,8 +73,9 @@ if (isset($_POST['submit'])) {
     } else {
         $active = "No";
     }
-    if (isset($_FILES['image']['name'])) {
+    if (isset($_FILES['image']['name']) && $_FILES['image']['error']=='UPLOAD_ERR_OK') {
         $image_name = $_FILES['image']['name'];
+
     
         // Check and create the destination directory if it doesn't exist
         if (!is_dir("../images/category")) {
@@ -87,13 +88,12 @@ if (isset($_POST['submit'])) {
         $destination_path = "../images/category/" . $image_name;
 
         $upload = move_uploaded_file($source_path, $destination_path);
-        // if ($upload == false) {
-        //     $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
-        //     header("location:".$home_url."admin/add-category.php");
-        //     die();
-        // }
+        if ($upload == false) {
+            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
+            header("location:".$home_url."admin/add-category.php");
+            die();
+        }
     }
-    
     else {
         $image_name = "";
     }
