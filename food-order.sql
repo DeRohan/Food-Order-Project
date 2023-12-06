@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2023 at 02:42 PM
+-- Generation Time: Dec 06, 2023 at 06:06 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,6 +47,26 @@ INSERT INTO `tbl_admin` (`admin_id`, `full_name`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_admin_reply`
+--
+
+CREATE TABLE `tbl_admin_reply` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `fd_id` int(10) UNSIGNED NOT NULL,
+  `admin_id` int(10) UNSIGNED NOT NULL,
+  `reply` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_admin_reply`
+--
+
+INSERT INTO `tbl_admin_reply` (`id`, `fd_id`, `admin_id`, `reply`) VALUES
+(3, 3, 1, 'I js replied :D');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_categories`
 --
 
@@ -69,6 +89,27 @@ INSERT INTO `tbl_categories` (`cat_id`, `title`, `image_name`, `featured`, `acti
 (21, 'Burgers', 'FoodHouse_842.jpg', 'Yes', 'Yes'),
 (22, 'Pizzas', 'FoodHouse_162.jpg', 'Yes', 'Yes'),
 (23, 'Dimsum', 'FoodHouse_812.jpg', 'Yes', 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_feedback`
+--
+
+CREATE TABLE `tbl_feedback` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `fd_desc` varchar(255) NOT NULL,
+  `fd_date` date NOT NULL DEFAULT current_timestamp(),
+  `replied` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_feedback`
+--
+
+INSERT INTO `tbl_feedback` (`id`, `user_id`, `fd_desc`, `fd_date`, `replied`) VALUES
+(3, 2, 'MORE MORE REPLY', '2023-12-06', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -214,7 +255,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `F_Name`, `L_Name`, `username`, `email`, `password`, `phone_no`, `address`) VALUES
-(2, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar@gmail.com', '25d55ad283aa400af464c76d713c07ad', '03447241789', 'Cantt Station Habib Metro');
+(2, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar69@gmail.com', '25d55ad283aa400af464c76d713c07ad', '03447241789', 'Cantt Station Habib Metro');
 
 --
 -- Indexes for dumped tables
@@ -227,10 +268,25 @@ ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `tbl_admin_reply`
+--
+ALTER TABLE `tbl_admin_reply`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fd_reply_fk` (`fd_id`),
+  ADD KEY `admin_reply_fk` (`admin_id`);
+
+--
 -- Indexes for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
   ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Indexes for table `tbl_feedback`
+--
+ALTER TABLE `tbl_feedback`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_fd_fk` (`user_id`);
 
 --
 -- Indexes for table `tbl_food`
@@ -281,7 +337,8 @@ ALTER TABLE `tbl_transactions`
 -- Indexes for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`,`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -294,10 +351,22 @@ ALTER TABLE `tbl_admin`
   MODIFY `admin_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `tbl_admin_reply`
+--
+ALTER TABLE `tbl_admin_reply`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
   MODIFY `cat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `tbl_feedback`
+--
+ALTER TABLE `tbl_feedback`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
@@ -344,6 +413,19 @@ ALTER TABLE `tbl_users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_admin_reply`
+--
+ALTER TABLE `tbl_admin_reply`
+  ADD CONSTRAINT `admin_reply_fk` FOREIGN KEY (`admin_id`) REFERENCES `tbl_admin` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fd_reply_fk` FOREIGN KEY (`fd_id`) REFERENCES `tbl_feedback` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_feedback`
+--
+ALTER TABLE `tbl_feedback`
+  ADD CONSTRAINT `user_fd_fk` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_food`
