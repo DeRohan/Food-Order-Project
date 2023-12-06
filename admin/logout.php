@@ -1,7 +1,7 @@
 <?php 
     include ('../config/connect.php');
     
-    session_destroy();
+    unset($_SESSION['admin']);
 
     header("location:".$home_url."admin/login.php")
 

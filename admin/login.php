@@ -37,9 +37,11 @@
 
         $result = mysqli_query($conn, $sql);
 
+
         if(mysqli_num_rows($result)==1) {
+            $row = mysqli_fetch_assoc($result);
             $_SESSION['login'] = "<div class='success'>Login Successful!</div>";
-            $_SESSION['user'] = $username;
+            $_SESSION['admin'] = $row['admin_id'];
             header('location:'.$home_url.'admin/');
         } 
         else {

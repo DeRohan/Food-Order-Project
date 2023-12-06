@@ -33,6 +33,9 @@
                         <a href="manage-orders.php">Orders</a>
                     </li>
                     <li>
+                        <a href="manage-feedback.php">Feedback</a>
+                    </li>
+                    <li>
                         <a href="logout.php">Logout</a>
                     </li>
                 </ul>
