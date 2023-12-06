@@ -61,13 +61,13 @@
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="restaurants.html">Restaurants</a>
+                        <a href="restaurants.php">Restaurants</a>
                     </li>
                     <li>
-                        <a href="order.html">Order</a>
+                        <a href="order.php">Order</a>
                     </li>
                     <li class="dropdown" onclick="toggleDropdown()">
                         <a href="#" class="account-link">Account</a>
@@ -139,32 +139,4 @@
     </section>
     <!-- Restaurant Section Ends Here -->
 
-    <!-- Social Section Starts Here -->
-    <section class="social">
-        <div class="container text-center">
-            <ul>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- Social Section Ends Here -->
-
-    <!-- Footer Section Starts Here -->
-    <section class="footer">
-        <div class="container text-center">
-            <p>2023 All Rights Reserved, The Food House.</p>
-        </div>
-    </section>
-    <!-- Footer Section Ends Here -->
-
-    <script src="js/index-script.js"></script>
-</body>
-</html>
+<?php include ('partials-usr/footer.php');?>
