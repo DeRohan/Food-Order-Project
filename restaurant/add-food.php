@@ -88,7 +88,7 @@
         </form>
     </div>
 </div>
-<?php //include('partials/footer.php'); ?>
+<?php include('partials/footer.php'); ?>
 <?php 
     if(isset($_POST['submit'])) {
         $res_id = $_GET['id'];

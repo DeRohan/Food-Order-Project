@@ -48,16 +48,15 @@
                     <td>Current Image: </td>
                     <td>
                         <?php
-                            echo $current_image;
-                        /*
+                        
                             if($current_image=="") {
                                 echo "<div class='error'>Image Not Available.</div>";
                             }
                             else {
                                 ?>
-                                    <img src="<?php echo $home_url;?>restaurant/images/<?php echo $current_image; ?>" width="70px">
+                                    <img src="<?php echo $home_url;?>images/restaurant/<?php echo $current_image; ?>" width="70px">
                                 <?php
-                            } */
+                            } 
                         ?>
                     </td>
                 </tr>
@@ -126,35 +125,42 @@
                 $featured = $_POST['featured'];
                 $active = $_POST['active'];
 
-                if(isset($_FILES['image']['name'])) {
+                if(isset($_FILES['image']['name']) && $_FILES['image']['error']==UPLOAD_ERR_OK) {
                     $image_name = $_FILES['image']['name'];
+
                     if($image_name!="") {
+                        if(!is_dir("../images/restaurant")) {
+                            mkdir("../images/restaurant", 0777, true);
+                        }
                         $ext = explode('.', $image_name);
                         $ext = end($ext);
-                        $image_name = "Food-Name-".rand(0000,9999).'.'.$ext;
-                        $source = $_FILES['image']['tmp_name'];
-                        $destination = "images/".$image_name;
-                        $upload = move_uploaded_file($source, $destination);
+                        $image_name = "Food-Name-".rand(0000,9999).'.'.$ext; 
+                        $source_path = $_FILES['image']['tmp_name'];
+                        $destination_path = "../images/restaurant/".$image_name;
+                        
+                        $upload = move_uploaded_file($source_path, $destination_path);
 
-                        // if($upload==False) {
-                        //     $_SESSION['upload'] = "<div class='error'>Failed to Upload New Image :(</div>";
-                        //     header('location:'.$home_url.'restaurant/manage-foods.php');
-                        //     die();
-                        // }
+                        if($upload==0) {
+                            $_SESSION['upload'] = "<div class='error'>Failed to Upload New Image :(</div>";
+                            header('location:'.$home_url.'restaurant/manage-foods.php');
+                            die();
+                        }
+                        if($current_image!="") {
+                            $remove_path = "../images/restaurant/" . $current_image;
+                            $remove = unlink($remove_path);
+                            if($remove==0) {
+                                $_SESSION['remove-failed'] = "<div class='error'>Failed to Remove Current Image :(</div>";
+                                header('location:'.$home_url.'restaurant/manage-foods.php');
+                                die();
+                            
+                            }
+                        }
                     }
-
-                    // if($current_image!="") {
-                    //     $remove_path = "images/".$current_image;
-                    //     $remove = unlink($remove_path);
-
-                    //     if($remove==False) {
-                    //         $_SESSION['remove-failed'] = "<div class='error'>Failed to Remove Current Image :(</div>";
-                    //         header("location:".$home_url."restaurant/manage-foods.php");
-                    //         die();
-                    //     }
-                    // }
-                } 
-                else {
+                    else{
+                        $image_name = "";
+                    }
+                }
+                else{
                     $image_name = $current_image;
                 }
 
@@ -183,4 +189,4 @@
     </div>
 </div>
 
-<?php //include ('partials/footer.php'); ?>
+<?php include ('partials/footer.php'); ?>
