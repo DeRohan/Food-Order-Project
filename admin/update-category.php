@@ -1,19 +1,25 @@
 <?php include('partials/menu.php');
-$id = $_GET['id'];
-$sql = "SELECT * FROM tbl_categories WHERE cat_id = $id";
-$result = mysqli_query($conn, $sql);
-if($result == true) {
-    $count = mysqli_num_rows($result);
-    if($count == 1) {
-        $rows = mysqli_fetch_assoc($result);
-        $title = $rows['title'];
-        $featured = $rows['featured'];
-        $active = $rows['active'];
-        $current_image = $rows['image_name'];
-    } else {
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM tbl_categories WHERE cat_id = $id";
+        $result = mysqli_query($conn, $sql);
+        if($result == true) {
+            $count = mysqli_num_rows($result);
+            if($count == 1) {
+                $rows = mysqli_fetch_assoc($result);
+                $title = $rows['title'];
+                $featured = $rows['featured'];
+                $active = $rows['active'];
+                $current_image = $rows['image_name'];
+            } else {
+                $_SESSION['no-category-found'] = "<div class='error'>Category Not Found :(</div>";
+                header("location:".$home_url."admin/manage-category.php");
+            }
+        }
+    }
+    else {
         header("location:".$home_url."admin/manage-category.php");
     }
-}
 ?>
 
 <div class="main-content">
@@ -32,16 +38,18 @@ if($result == true) {
                     <td>Current Image: </td>
                     <td>
                         <?php
-                        if($current_image == "") {
-                            echo "Image Not Added";
+                        if($current_image != "") {
+                            ?>
+                            <img src="<?php echo $home_url; ?>images/category/<?php echo $current_image; ?>" width="100px">
+                            <?php
                         } else {
-                            echo $current_image;
+                            echo "<div class='error'>Image Not Added :(</div>";
                         }
                         ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Select Image: </td>
+                    <td>Select New Image: </td>
                     <td>
                         <input type="file" name="image">
                     </td>
@@ -75,53 +83,69 @@ if($result == true) {
                 </tr>
                 <tr>
                     <td colspan="5">
+                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                         <input type="submit" name="submit" value="Update Category" class="btn-secondary">
                     </td>
                 </tr>
             </table>
         </form>
+
         <?php
         if(isset($_POST['submit'])) {
+            $id = $_POST['id'];
             $title = $_POST['title'];
             $featured = $_POST['featured'];
             $active = $_POST['active'];
-            if(isset($_FILES['image']['name'])) {
+            $current_image = $_POST['current_image'];
+            
+            if(isset($_FILES['image']['name']) && $_FILES['image']['error']==UPLOAD_ERR_OK) {
                 $image_name = $_FILES['image']['name'];
-                if($image_name != "") {
+
+                if($image_name!="") {
+                    if (!is_dir("../images/category")) {
+                        mkdir("../images/category", 0777, true);
+                    }
                     $ext = explode('.', $image_name);
                     $ext = end($ext);
-                    $image_name = "Food_Category_".rand(000, 999).'.'.$ext;
+                    $image_name = "FoodHouse_".rand(000,999).".".$ext;
                     $source_path = $_FILES['image']['tmp_name'];
-                    $destination_path = "../images/category/".$image_name;
+                    $destination_path = "../images/category/" . $image_name;
+        
                     $upload = move_uploaded_file($source_path, $destination_path);
-                    // if($upload == false) {
-                    //     $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
-                    //     header("location:".$home_url."admin/manage-category.php");
-                    //     die();
-                    // }
-                    // if($image_name != "") {
-                    //     $remove_path = "../images/category/".$image_name;
-                    //     $remove = unlink($remove_path);
-                    //     // if($remove == false) {
-                    //     //     $_SESSION['remove-failed'] = "<div class='error'>Failed to Remove Current Image :(</div>";
-                    //     //     header("location:".$home_url."admin/manage-category.php");
-                    //     //     die();
-                    //     // }
+                    if ($upload == 0) {
+                        $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
+                        header("location:".$home_url."admin/add-category.php");
+                        die();
+                    }
+                    if($current_image!="") {
+                        $remove_path = "../images/category/" . $current_image;
+                        $remove = unlink($remove_path);
+                        if($remove==0) {
+                            $_SESSION['failed-remove'] = "<div class='error'>Failed to Remove Current Image :(</div>";
+                            header("location:".$home_url."admin/manage-category.php");
+                            die();
+                        
+                        } 
+                    }
                 }
-                // } else {
-                //     $image_name = "";
-                // }
-            } else {
+                else{
+                    $image_name = "";
+                }
+            }
+            else {
                 $image_name = $current_image;
             }
+            
+            
             $query = "UPDATE tbl_categories SET 
                     title='$title', 
                     featured='$featured', 
                     active='$active', 
                     image_name = '$image_name' 
                     WHERE cat_id=$id";
-            $result = mysqli_query($conn, $query);
-            if($result == true) {
+            $result2 = mysqli_query($conn, $query);
+            if($result2 == true) {
                 $_SESSION['update'] = "<div class='success'>Category Updated Successfully :)</div>";
                 header("location:".$home_url."admin/manage-category.php");
             } else {
@@ -130,6 +154,7 @@ if($result == true) {
             }
         }
         ?>
+
     </div>
 </div>
 

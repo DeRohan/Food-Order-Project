@@ -68,9 +68,8 @@
                                         echo "<div class='error'>Image Not Added.</div>";
                                     }
                                     else {
-                                        
-                                        echo $image_name;?>
-                                        <!-- <img src="../images/<?php echo $image_name; ?>" width="100px"> -->
+                                        ?>
+                                        <img src="../images/restaurant/<?php echo $image_name; ?>" width="100px">
                                         <?php
                                     }
                                 ?>

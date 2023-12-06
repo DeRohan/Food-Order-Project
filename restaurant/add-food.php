@@ -1,7 +1,8 @@
-<?php include ('partials/menu.php'); ?>
+<?php include ('partials/menu.php'); 
+?>
 
 <div class="main-content">
-    <div class="wrapper">
+    <div class="wrapper" style="width: 75%;">
         <h2 class="text-center">Add New Food</h2>
         <?php 
             if(isset($_SESSION['upload'])) {
@@ -50,10 +51,10 @@
                                 $count = mysqli_num_rows($result);
                                 if($count > 0) {
                                     while($row = mysqli_fetch_assoc($result)) {
-                                        $id = $row['ID'];
+                                        $id = $row['cat_id'];
                                         $title = $row['title'];
                                         ?>
-                                        <option value="<?php echo $title; ?>"><?php echo $title; ?></option>
+                                        <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
                                         <?php
                                     }
                                 }
@@ -87,7 +88,7 @@
         </form>
     </div>
 </div>
-<?php include('partials/footer.php'); ?>
+<?php //include('partials/footer.php'); ?>
 <?php 
     if(isset($_POST['submit'])) {
         $res_id = $_GET['id'];
@@ -95,6 +96,7 @@
         $description = $_POST['description'];
         $price = $_POST['price'];
         $category = $_POST['category'];
+
         if(isset($_POST['featured'])) {
             $featured = $_POST['featured'];
         }
@@ -107,43 +109,44 @@
         else {
             $active = "No";
         }
-        if(isset($_FILES['image']['name'])) {
+        if(isset($_FILES['image']['name']) && $_FILES['image']['error']==UPLOAD_ERR_OK) {
             $image_name = $_FILES['image']['name'];
             if($image_name != "") {
+                if(!is_dir("../images/restaurant")) {
+                    mkdir("../images/restaurant", 0777, true);
+                }
                 $ext = explode('.', $image_name);
                 $ext = end($ext);
                 $image_name = "Food-Name-".rand(0000, 9999).".".$ext;
                 $source_path = $_FILES['image']['tmp_name'];
-                $destination_path = "images/".$image_name;
+                $destination_path = "../images/restaurant/" . $image_name;
+
                 $upload = move_uploaded_file($source_path, $destination_path);
-                // if($upload == false) {
-                //     $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
-                //     header('location:'.$home_url.'restaurant/add-food.php');
-                //     die();
-                // }
+                if($upload == 0) {
+                    $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
+                    header('location:'.$home_url.'restaurant/add-food.php');
+                    die();
+                }
+            }
+            else{
+                $image_name = "";
             }
         }
         else {
             $image_name = "";
         }
-        //Fetch Category ID
-        $sql_category = "SELECT * FROM tbl_categories WHERE title = '$category'";
-        $result_category = mysqli_query($conn, $sql_category);
-        $data_category = mysqli_fetch_assoc($result_category);
-        $cat_id = $data_category['cat_id'];
-        //Insert Food into the Database
-        $sql = "INSERT INTO tbl_food SET
+        $sql2 = "INSERT INTO tbl_food SET
             title = '$name',
             description = '$description',
             price = '$price',
             image_name = '$image_name',
-            cat_id = $cat_id,
+            cat_id = $category,
             featured = '$featured',
             active = '$active',
             res_id = $res_id
         ";
-        $result = mysqli_query($conn, $sql);
-        if($result == true) {
+        $result2 = mysqli_query($conn, $sql2);
+        if($result2 == true) {
             $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
             header('location:'.$home_url.'restaurant/manage-foods.php');
         }

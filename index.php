@@ -17,13 +17,31 @@
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <a href="category-foods.php">
-            <div class="box-3 float-container">
-                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+            <?php
+                $sql = "SELECT * FROM tbl_categories";
+                $result = mysqli_query($conn, $sql);
+                $count = mysqli_num_rows($result);
 
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </a>
+                if($count > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $id = $row['cat_id'];
+                        $title = $row['title'];
+                        $image_name = $row['image_name'];
+                        ?>
+                        <a href="category-foods.php">
+                            <div class="box-3 float-container">
+                                <img src="images/category/.jpg" alt="Pizza" class="img-responsive img-curve">
+                
+                                <h3 class="float-text text-white">Pizza</h3>
+                            </div>
+                        </a>
+                        <?php
+                    }
+                }
+                else{
+                    echo "<div class='error'>No Categories Available.</div>"
+                }
+            ?>
             <div class="clearfix"></div>
         </div>
     </section>

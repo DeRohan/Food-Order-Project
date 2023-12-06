@@ -30,7 +30,6 @@
                         <input type="file" name="image">
                     </td>
                 </tr>
-
                 <tr>
                     <td>Featured: </td>
                     <td>
@@ -56,7 +55,7 @@
     </div>
 </div>
 
-<?php include("partials/footer.php"); ?>
+<?php  include("partials/footer.php"); ?>
 
 <?php
 if (isset($_POST['submit'])) {
@@ -73,25 +72,29 @@ if (isset($_POST['submit'])) {
     } else {
         $active = "No";
     }
-    if (isset($_FILES['image']['name']) && $_FILES['image']['error']=='UPLOAD_ERR_OK') {
+    if (isset($_FILES['image']['name']) && $_FILES['image']['error']== UPLOAD_ERR_OK) {
         $image_name = $_FILES['image']['name'];
 
-    
-        // Check and create the destination directory if it doesn't exist
-        if (!is_dir("../images/category")) {
-            mkdir("../images/category", 0777, true);
-        }
-        $ext = explode('.', $image_name);
-        $ext = end($ext);
-        $image_name = "FoodHouse_".rand(000,999).".".$ext;
-        $source_path = $_FILES['image']['tmp_name'];
-        $destination_path = "../images/category/" . $image_name;
+        if($image_name!="") {
+            // Check and create the destination directory if it doesn't exist
+            if (!is_dir("../images/category")) {
+                mkdir("../images/category", 0777, true);
+            }
+            $ext = explode('.', $image_name);
+            $ext = end($ext);
+            $image_name = "FoodHouse_".rand(000,999).".".$ext;
+            $source_path = $_FILES['image']['tmp_name'];
+            $destination_path = "../images/category/" . $image_name;
 
-        $upload = move_uploaded_file($source_path, $destination_path);
-        if ($upload == false) {
-            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
-            header("location:".$home_url."admin/add-category.php");
-            die();
+            $upload = move_uploaded_file($source_path, $destination_path);
+            if ($upload == 0) {
+                $_SESSION['upload'] = "<div class='error'>Failed to Upload Image :(</div>";
+                header("location:".$home_url."admin/add-category.php");
+                die();
+            }
+        }
+        else{
+            $image_name = "";
         }
     }
     else {
