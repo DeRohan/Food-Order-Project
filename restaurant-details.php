@@ -9,8 +9,6 @@ if(isset($_GET['id'])) {
             $rows = mysqli_fetch_assoc($result);
             $title = $rows['Name'];
             $description = $rows['Description'];
-            $featured = $rows['featured'];
-            $active = $rows['active'];
             $current_image = $rows['image_name'];
         } else {
             $_SESSION['no-restaurant-found'] = "<div class='error'>Restaurant Not Found :(</div>";
@@ -35,7 +33,6 @@ if(isset($_GET['id'])) {
 
 <!-- Restaurant Menu -->
 
-<!-- fOOD MEnu Section Starts Here -->
 <section class="food-menu">
     <div class="container">
         <h2 class="text-center">Food Menu</h2>
@@ -76,7 +73,7 @@ if(isset($_GET['id'])) {
     </div>
 
 </section>
-<!-- fOOD Menu Section Ends Here -->
+<!-- Restaurant Menu Ends Here -->
 
 
 <?php include('partials-usr/footer.php'); ?>
