@@ -39,8 +39,13 @@
                     <li class="dropdown" onclick="toggleDropdown()">
                         <a href="#" class="account-link">Account</a>
                         <ul class="dropdown-content" id="accountDropdown">
-                            <li><a href="usr-update.php">Edit Details</a></li>
-                            <br>
+                            <?php if(isset($_SESSION['customer'])) {
+                                ?>
+                                <li><a href="usr-update.php">Edit Details</a></li>
+                                <br>
+                                <?php
+                            }
+                            ?>
                             <li><a href="<?php echo $home_url; ?>feedback.php">Feedback</a></li>
                             <li>
                                 <?php 

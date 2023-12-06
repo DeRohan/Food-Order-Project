@@ -19,22 +19,17 @@
                 <div class="col-4 text-center">
                     <h1>5</h1>
                     <br>
-                    Categories
+                    Restaurants
                 </div>
                 <div class="col-4 text-center">
                     <h1>5</h1>
                     <br>
-                    Categories
+                    Users
                 </div>
                 <div class="col-4 text-center">
                     <h1>5</h1>
                     <br>
-                    Categories
-                </div>
-                <div class="col-4 text-center">
-                    <h1>5</h1>
-                    <br>
-                    Categories
+                    Revenue Generated
                 </div>
                 <div class="clearfix"> </div>
             </div>
