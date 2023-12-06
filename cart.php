@@ -96,7 +96,7 @@
             <span>$69.97</span>
         </div>
 
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button action="checkout.php" class="checkout-btn">Proceed to Checkout</button>
     </div>
 </body>
 </html>

@@ -29,7 +29,7 @@
                     <li>
                         <a href="<?php echo $home_url;?>restaurants.php">Restaurants</a>
                     </li>
-                    <li>
+                                        <li>
                         <a href="<?php echo $home_url;?>cart.php" onclick="toggleCart()">Cart</a>
                     </li>
                     <li class="dropdown" onclick="toggleDropdown()">
@@ -43,6 +43,15 @@
                             }
                             ?>
                             <li><a href="<?php echo $home_url; ?>feedback.php">Feedback</a></li>
+                            <li>
+                                <?php 
+                                    if(isset($_SESSION['customer'])) {
+                                        echo '<a href="'.$home_url.'order-history.php">Order History</a>';
+                                    } else {
+                                        echo '<a href="'.$home_url.'select-option.php">Login/Sign Up</a>';
+                                    }
+                                ?>
+                            </li>
                             <li>
                                 <?php 
                                     if(isset($_SESSION['customer'])) {
