@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2023 at 06:06 PM
+-- Generation Time: Dec 06, 2023 at 09:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,6 +63,27 @@ CREATE TABLE `tbl_admin_reply` (
 
 INSERT INTO `tbl_admin_reply` (`id`, `fd_id`, `admin_id`, `reply`) VALUES
 (3, 3, 1, 'I js replied :D');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `cart_id` int(10) UNSIGNED NOT NULL,
+  `item_id` int(10) UNSIGNED NOT NULL,
+  `res_id` int(10) UNSIGNED NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`cart_id`, `item_id`, `res_id`, `quantity`) VALUES
+(1, 7, 32, 2),
+(1, 7, 32, 2);
 
 -- --------------------------------------------------------
 
@@ -257,6 +278,20 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`user_id`, `F_Name`, `L_Name`, `username`, `email`, `password`, `phone_no`, `address`) VALUES
 (2, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar69@gmail.com', '25d55ad283aa400af464c76d713c07ad', '03447241789', 'Cantt Station Habib Metro');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_wallet`
+--
+
+CREATE TABLE `tbl_wallet` (
+  `wallet_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `number` varchar(100) NOT NULL,
+  `cvv` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -341,6 +376,13 @@ ALTER TABLE `tbl_users`
   ADD UNIQUE KEY `username` (`username`,`email`);
 
 --
+-- Indexes for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  ADD PRIMARY KEY (`wallet_id`),
+  ADD KEY `user_wallet_fk` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -411,6 +453,12 @@ ALTER TABLE `tbl_users`
   MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  MODIFY `wallet_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -459,6 +507,12 @@ ALTER TABLE `tbl_restaurant_registration`
 --
 ALTER TABLE `tbl_transactions`
   ADD CONSTRAINT `transaction_fk` FOREIGN KEY (`order_id`) REFERENCES `tbl_orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  ADD CONSTRAINT `user_wallet_fk` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

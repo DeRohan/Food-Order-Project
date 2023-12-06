@@ -73,6 +73,9 @@
 
     <div class="cart-container">
         <div class="cart-item">
+            <?php 
+                
+            ?>
             <img src="product1.jpg" alt="Product 1">
             <div>
                 <h3>Product 1</h3>
@@ -80,21 +83,6 @@
                 <p>Quantity: 2</p>
             </div>
             <p>$39.98</p>
-        </div>
-
-        <div class="cart-item">
-            <img src="product2.jpg" alt="Product 2">
-            <div>
-                <h3>Product 2</h3>
-                <p>Price: $29.99</p>
-                <p>Quantity: 1</p>
-            </div>
-            <p>$29.99</p>
-        </div>
-
-        <div class="cart-total">
-            <span>Total:</span>
-            <span>$69.97</span>
         </div>
 
         <button action="checkout.php" class="checkout-btn">Proceed to Checkout</button>
