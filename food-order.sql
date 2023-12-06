@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2023 at 11:30 AM
+-- Generation Time: Dec 06, 2023 at 02:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,7 +63,12 @@ CREATE TABLE `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`cat_id`, `title`, `image_name`, `featured`, `active`) VALUES
-(18, 'Chinese', 'FoodHouse_963.jpeg', 'Yes', 'Yes');
+(18, 'Chinese', 'FoodHouse_963.jpeg', 'No', 'Yes'),
+(19, 'Desi BBQ', 'FoodHouse_852.jpg', 'No', 'Yes'),
+(20, 'Beverages', 'FoodHouse_905.jpg', 'Yes', 'Yes'),
+(21, 'Burgers', 'FoodHouse_842.jpg', 'Yes', 'Yes'),
+(22, 'Pizzas', 'FoodHouse_162.jpg', 'Yes', 'Yes'),
+(23, 'Dimsum', 'FoodHouse_812.jpg', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -132,17 +137,21 @@ CREATE TABLE `tbl_restaurants` (
   `Description` text NOT NULL,
   `Address` varchar(255) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `image_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_restaurants`
 --
 
-INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`, `username`, `password`) VALUES
-(25, 'Cafe Premo', 'www are owned by xanders', 'zamzama commerical', 'premo', 'c93ccd78b2076528346216b3b2f701e6'),
-(32, 'Cafe Xanders', 'We make the best Pasta in Karachi!', 'Phase 5 Near Dolmen Mall', 'xanders', 'c93ccd78b2076528346216b3b2f701e6'),
-(33, 'Cafe Floc', 'we are boring and like every other cafe', 'zamzama phase 5 defence', 'floc', '25d55ad283aa400af464c76d713c07ad');
+INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`, `username`, `password`, `image_name`) VALUES
+(25, 'Cafe Premo', 'www are owned by xanders', 'zamzama commerical', 'premo', 'c93ccd78b2076528346216b3b2f701e6', NULL),
+(32, 'Cafe Xanders', 'We make the best Pasta in Karachi!', 'Phase 5 Near Dolmen Mall', 'xanders', 'c93ccd78b2076528346216b3b2f701e6', NULL),
+(33, 'Cafe Floc', 'we are boring and like every other cafe', 'zamzama phase 5 defence', 'floc', '25d55ad283aa400af464c76d713c07ad', NULL),
+(34, 'Kabab Fries', 'We serve McDonalds fries', 'Sindhi Muslim', 'kbfries', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_682.png'),
+(35, 'Mcdonalds Gingy', 'We serve Gingerbread ', 'Cantt Station', 'gingy', 'c93ccd78b2076528346216b3b2f701e6', 'Restaurant_912.png'),
+(36, 'KFC', 'We serve fried chicken', 'Sindhi Muslim', 'friedchicken', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_458.png');
 
 -- --------------------------------------------------------
 
@@ -163,7 +172,10 @@ CREATE TABLE `tbl_restaurant_registration` (
 INSERT INTO `tbl_restaurant_registration` (`registration_id`, `restaurant_id`, `registration_date`) VALUES
 (6, 25, '2023-12-05'),
 (7, 32, '2023-12-05'),
-(8, 33, '2023-12-05');
+(8, 33, '2023-12-05'),
+(9, 34, '2023-12-06'),
+(10, 35, '2023-12-06'),
+(11, 36, '2023-12-06');
 
 -- --------------------------------------------------------
 
@@ -202,7 +214,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `F_Name`, `L_Name`, `username`, `email`, `password`, `phone_no`, `address`) VALUES
-(1, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar@gmail.com', '18373773', '19199191', 'station');
+(2, 'Rohan', 'Kumar', 'yeetpain', 'rohankumar@gmail.com', '25d55ad283aa400af464c76d713c07ad', '03447241789', 'Cantt Station Habib Metro');
 
 --
 -- Indexes for dumped tables
@@ -285,7 +297,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  MODIFY `cat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `cat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
@@ -309,13 +321,13 @@ ALTER TABLE `tbl_order_details`
 -- AUTO_INCREMENT for table `tbl_restaurants`
 --
 ALTER TABLE `tbl_restaurants`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_restaurant_registration`
 --
 ALTER TABLE `tbl_restaurant_registration`
-  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_transactions`
@@ -327,7 +339,7 @@ ALTER TABLE `tbl_transactions`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
