@@ -75,7 +75,7 @@
                         <ul class="dropdown-content" id="accountDropdown">
                             <li><a href="#">Edit Details</a></li>
                             <br>
-                            <li><a href="feedback.html">Feedback</a></li>
+                            <li><a href="feedback.php">Feedback</a></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@
             <h2 class="text-center">Explore Restaurants</h2>
 
             <!-- Restaurant 1 -->
-            <a href="restaurant-details.html">
+            <a href="restaurant-details.php">
                 <div class="box-3 float-container">
                     <img src="images/burger.jpg" alt="Restaurant 1" class="img-responsive img-curve">
                     <div class="overlay">
@@ -114,7 +114,7 @@
             </a>
 
             <!-- Restaurant 2 -->
-            <a href="restaurant-details.html">
+            <a href="restaurant-details.php">
                 <div class="box-3 float-container">
                     <img src="images/pizza.jpg" alt="Restaurant 2" class="img-responsive img-curve">
                     <div class="overlay">
@@ -125,7 +125,7 @@
             </a>
 
             <!-- Restaurant 3 -->
-            <a href="restaurant-details.html">
+            <a href="restaurant-details.php">
                 <div class="box-3 float-container">
                     <img src="images/momo.jpg" alt="Restaurant 3" class="img-responsive img-curve">
                     <div class="overlay">
@@ -135,7 +135,7 @@
                 </div>
             </a>
              <!-- Restaurant 4 -->
-             <a href="restaurant-details.html">
+             <a href="restaurant-details.php">
                 <div class="box-3 float-container">
                     <img src="images/drink.jpg" alt="Restaurant 4" class="img-responsive img-curve">
                     <div class="overlay">

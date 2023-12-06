@@ -18,7 +18,7 @@
             <h2 class="text-center">Explore Foods</h2>
 
             <?php
-                $sql = "SELECT * FROM tbl_categories";
+                $sql = "SELECT * FROM tbl_categories WHERE featured = 'Yes' AND active = 'Yes' ";
                 $result = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($result);
 
@@ -30,9 +30,17 @@
                         ?>
                         <a href="category-foods.php">
                             <div class="box-3 float-container">
-                                <img src="images/category/.jpg" alt="Pizza" class="img-responsive img-curve">
-                
-                                <h3 class="float-text text-white">Pizza</h3>
+                                <?php 
+                                    if($image_name=="") {
+                                        echo "<div class='error'> Image Not Avaialble</div>";
+                                    } 
+                                    else{
+                                        ?>
+                                        <img src="<?php echo $home_url; ?>images/category/<?php echo $image_name;?>" alt="<?php echo $title; ?>" class="img-responsive">
+                                        <?php
+                                    }
+                                ?> 
+                                <h3 class="float-text text-white"><?php echo $title; ?></h3>
                             </div>
                         </a>
                         <?php
