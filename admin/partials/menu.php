@@ -24,6 +24,9 @@
                         <a href="manage-restaurants.php">Restaurants</a>
                     </li>
                     <li>
+                        <a href="manage-users.php">Users</a>
+                    </li>
+                    <li>
                         <a href="manage-category.php">Categories</a>
                     </li>
                     <li>
