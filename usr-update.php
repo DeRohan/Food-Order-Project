@@ -112,14 +112,18 @@
         <?php if (!$isEditing): ?>
             <!-- Display user details -->
             <h2 class="custom-heading">User Details</h2>
-            <br>
             <?php 
                 if(isset($_SESSION['update'])) {
+                    ?>
+                    <br>
+                    <?php
                     echo $_SESSION['update'];
                     unset($_SESSION['update']);
+                    ?>
+                    <br><br>
+                    <?php
                 }
             ?>
-            <br><br>
             <p class="custom-paragraph"><strong>First Name:</strong> <?php echo $userData['F_Name']; ?></p>
             <p class="custom-paragraph"><strong>Last Name:</strong> <?php echo $userData['L_Name']; ?></p>
             <p class="custom-paragraph"><strong>Username:</strong> <?php echo $userData['username']; ?></p>
