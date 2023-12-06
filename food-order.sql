@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2023 at 06:44 PM
+-- Generation Time: Dec 06, 2023 at 11:30 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,8 +63,7 @@ CREATE TABLE `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`cat_id`, `title`, `image_name`, `featured`, `active`) VALUES
-(1, 'Pizza', NULL, 'Yes', 'No'),
-(2, 'burger', NULL, 'Yes', 'Yes');
+(18, 'Chinese', 'FoodHouse_963.jpeg', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -89,7 +88,7 @@ CREATE TABLE `tbl_food` (
 --
 
 INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `cat_id`, `featured`, `active`, `res_id`) VALUES
-(2, 'Buregr', 'chicken richness', 5000, 'Food-Name-571.webp', 2, 'Yes', 'Yes', 33);
+(7, 'Babars Momos', 'Yeehaw', 1200, 'Food-Name-3435.jpg', 18, 'Yes', 'Yes', 32);
 
 -- --------------------------------------------------------
 
@@ -286,13 +285,13 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  MODIFY `cat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cat_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
