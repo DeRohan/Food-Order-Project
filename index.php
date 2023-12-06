@@ -39,7 +39,7 @@
                     }
                 }
                 else{
-                    echo "<div class='error'>No Categories Available.</div>"
+                    echo "<div class='error'>No Categories Available.</div>";
                 }
             ?>
             <div class="clearfix"></div>
