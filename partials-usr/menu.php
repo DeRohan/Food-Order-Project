@@ -7,16 +7,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Website</title>
-
-    <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- Navbar Section Starts Here -->
     <section class="navbar">
         <div class="container">
             <div class="logo">
@@ -33,9 +29,6 @@
                     <li>
                         <a href="<?php echo $home_url;?>restaurants.php">Restaurants</a>
                     </li>
-                    <!-- <li>
-                        <a href="<?php echo $home_url;?>order.php">Order</a>
-                    </li> -->
                     <li class="dropdown" onclick="toggleDropdown()">
                         <a href="#" class="account-link">Account</a>
                         <ul class="dropdown-content" id="accountDropdown">
@@ -58,10 +51,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#" onclick="toggleCart()">Cart</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="clearfix"></div>
         </div>
     </section>
-    <!-- Navbar Section Ends Here -->
+
+    <section class="cart" id="cartSection">
+        <div class="container">
+            <!-- Cart items will be displayed here -->
+        </div>
+    </section>
+
+    <script src="js/cart.js"></script> <!-- Add this line for the cart functionality -->
+</body>
+
+</html>

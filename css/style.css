@@ -274,6 +274,35 @@ fieldset{
     font-weight: bold;
 }
 
+/* Cart Styles */
+.cart {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 300px;
+    z-index: 999;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 10  px;
+}
 
 
 /* CSS for Mobile Size or Smaller Screen */
