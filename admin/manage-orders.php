@@ -27,8 +27,8 @@
                     INNER JOIN tbl_order_details od ON o.order_id = od.order_id
                     INNER JOIN tbl_food f ON od.item_id = f.id
                     INNER JOIN tbl_restaurants r ON o.restaurant_id = r.ID
-                    INNER JOIN tbl_users u on o.user_id = u.user_id
-                    INNER JOIN tbl_transactions tr on o.order_id = tr.order_id";
+                    INNER JOIN tbl_users u ON o.user_id = u.user_id
+                    INNER JOIN tbl_transactions tr ON o.order_id = tr.order_id";
 
             $result = mysqli_query($conn, $sql);
 
@@ -65,9 +65,9 @@
                             <?php echo $status ?>
                         </td>
                         <td>
-                            <form action="" method="POST" id="statusForm">
+                            <form action="" method="POST" id="statusForm_<?php echo $order_id; ?>">
                                 <!-- <label for="status">Change Status</label> -->
-                                <select name="status" id="status" onchange="document.getElementById('statusForm').submit()" style="width: 100; height: 30;background-color: #38ada9;font-size: 15;">
+                                <select name="status" id="status" onchange="document.getElementById('statusForm_<?php echo $order_id; ?>').submit()" style="width: 100px; height: 30;background-color: #38ada9;font-size: 15;">
                                     <option value="Ordered">Ordered</option>
                                     <option value="Preparing">Preparing</option>
                                     <option value="Delivering">Delivering</option>
@@ -93,7 +93,7 @@
 
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $order_id = $_POST['order_id'];
     $new_status = $_POST['status'];
 
