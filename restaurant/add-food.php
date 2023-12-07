@@ -89,70 +89,69 @@
     </div>
 </div>
 <?php include('partials/footer.php'); ?>
-<?php 
-    if(isset($_POST['submit'])) {
-        $res_id = $_GET['id'];
-        $name = $_POST['name'];
-        $description = $_POST['description'];
-        $price = $_POST['price'];
-        $category = $_POST['category'];
+<?php
+if (isset($_POST['submit'])) {
+    $res_id = $_GET['id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $category = $_POST['category'];
 
-        if(isset($_POST['featured'])) {
-            $featured = $_POST['featured'];
-        }
-        else {
-            $featured = "No";
-        }
-        if(isset($_POST['active'])) {
-            $active = $_POST['active'];
-        }
-        else {
-            $active = "No";
-        }
-        if(isset($_FILES['image']['name']) && $_FILES['image']['error']==UPLOAD_ERR_OK) {
-            $image_name = $_FILES['image']['name'];
-            if($image_name != "") {
-                if(!is_dir("../images/restaurant")) {
-                    mkdir("../images/restaurant", 0777, true);
-                }
-                $ext = explode('.', $image_name);
-                $ext = end($ext);
-                $image_name = "Food-Name-".rand(0000, 9999).".".$ext;
-                $source_path = $_FILES['image']['tmp_name'];
-                $destination_path = "../images/restaurant/" . $image_name;
+    if (isset($_POST['featured'])) {
+        $featured = $_POST['featured'];
+    } else {
+        $featured = "No";
+    }
 
-                $upload = move_uploaded_file($source_path, $destination_path);
-                if($upload == 0) {
-                    $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
-                    header('location:'.$home_url.'restaurant/add-food.php');
-                    die();
-                }
+    if (isset($_POST['active'])) {
+        $active = $_POST['active'];
+    } else {
+        $active = "No";
+    }
+
+    if (isset($_FILES['image']['name']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+        $image_name = $_FILES['image']['name'];
+        if ($image_name != "") {
+            if (!is_dir("../images/restaurant")) {
+                mkdir("../images/restaurant", 0777, true);
             }
-            else{
-                $image_name = "";
+            $ext = explode('.', $image_name);
+            $ext = end($ext);
+            $image_name = "Food-Name-" . rand(0000, 9999) . "." . $ext;
+            $source_path = $_FILES['image']['tmp_name'];
+            $destination_path = "../images/restaurant/" . $image_name;
+
+            $upload = move_uploaded_file($source_path, $destination_path);
+            if ($upload == 0) {
+                $_SESSION['upload'] = "<div class='error'>Failed to Upload Image.</div>";
+                header('location:' . $home_url . 'restaurant/add-food.php');
+                die();
             }
-        }
-        else {
+        } else {
             $image_name = "";
         }
-        $sql2 = "INSERT INTO tbl_food SET
-            title = '$name',
-            description = '$description',
-            price = '$price',
-            image_name = '$image_name',
-            cat_id = $category,
-            featured = '$featured',
-            active = '$active',
-            res_id = $res_id
-        ";
-        $result2 = mysqli_query($conn, $sql2);
-        if($result2 == true) {
-            $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
-            header('location:'.$home_url.'restaurant/manage-foods.php');
-        }
-        else {
-            $_SESSION['add'] = "<div class='error'>Failed to Add Food.</div>";
-            header('location:'.$home_url.'restaurant/manage-foods.php');
-        }
+    } else {
+        $image_name = "";
     }
+
+    $sql2 = "INSERT INTO tbl_food SET
+        title = '$name',
+        description = '$description',
+        price = '$price',
+        image_name = '$image_name',
+        cat_id = $category,
+        featured = '$featured',
+        active = '$active',
+        res_id = $res_id
+    ";
+    $res = mysqli_query($conn, $sql2);
+
+    if ($res) {
+        $_SESSION['add'] = "<div class='success'>Food Added Successfully.</div>";
+        header('location:' . $home_url . 'restaurant/manage-foods.php');
+    } else {
+        $_SESSION['add'] = "<div class='error'>Failed to Add Food.</div>";
+        header('location:' . $home_url . 'restaurant/manage-foods.php');
+    }
+}
 ?>

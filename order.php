@@ -13,7 +13,7 @@
         $res_check = mysqli_query($conn, $check_cart);
         if(mysqli_num_rows($res_check) > 0) {
             $_SESSION['cart'] = "<div class='error'>You can only order from one restaurant at a time.</div>";
-            header("location:".$home_url."restaurants.php");
+            header("location:".$home_url."cart.php");
             //die();
         } 
         else {

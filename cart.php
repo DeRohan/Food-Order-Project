@@ -64,6 +64,7 @@ include('partials-usr/login-check.php');
             cursor: pointer;
             font-size: 16px;
         }
+
         .continue-btn {
             background-color: #0984e3;
             color: #fff;
@@ -73,6 +74,7 @@ include('partials-usr/login-check.php');
             cursor: pointer;
             font-size: 16px;
         }
+
         .empty-btn {
             background-color: #d63031;
             color: #fff;
@@ -90,6 +92,20 @@ include('partials-usr/login-check.php');
         <header>
             <h1>Shopping Cart</h1>
         </header>
+        <?php
+        if (isset($_SESSION['cart'])) {
+            ?>
+            <br>
+            <div class="text-center">
+                <?php
+                echo $_SESSION['cart'];
+                unset($_SESSION['cart']);
+                ?>
+            </div>
+            <br>
+            <?php
+        }
+        ?>
 
         <div class="cart-container">
             <?php
@@ -111,13 +127,22 @@ include('partials-usr/login-check.php');
                     $total += ($f_price * $quantity);
                     ?>
                     <div class="cart-item">
-                        <img src="<?php echo $home_url; ?>images/restaurant/<?php echo $image_name;?>" alt="<?php echo $f_title;?>">
+                        <img src="<?php echo $home_url; ?>images/restaurant/<?php echo $image_name; ?>"
+                            alt="<?php echo $f_title; ?>">
                         <div>
-                            <h3><?php echo $f_title;?></h3>
-                            <p>Price: <?php echo $f_price;?></p>
-                            <p>Quantity: <?php echo $quantity;?></p>
+                            <h3>
+                                <?php echo $f_title; ?>
+                            </h3>
+                            <p>Price:
+                                <?php echo $f_price; ?>
+                            </p>
+                            <p>Quantity:
+                                <?php echo $quantity; ?>
+                            </p>
                         </div>
-                        <p><?php echo $f_price * $quantity;?></p>
+                        <p>
+                            <?php echo $f_price * $quantity; ?>
+                        </p>
                     </div>
                     <?php
                 }
@@ -125,16 +150,18 @@ include('partials-usr/login-check.php');
             ?>
             <div class="cart-total">
                 <h3>Total</h3>
-                <p><?php echo $total;?></p>
+                <p>
+                    <?php echo $total; ?>
+                </p>
             </div>
             <br><br>
             <a href="checkout.php">
                 <button class="checkout-btn">Proceed to Checkout</button>
             </a>
-            <a href="<?php echo $home_url;?>">
+            <a href="<?php echo $home_url; ?>">
                 <button action="" class="continue-btn">Continue Shopping</button>
             </a>
-            <a href="<?php echo $home_url;?>empty-cart.php">
+            <a href="<?php echo $home_url; ?>empty-cart.php">
                 <button action="" class="empty-btn">Empty Cart</button>
             </a>
         </div>

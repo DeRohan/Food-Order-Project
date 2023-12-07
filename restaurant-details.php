@@ -75,6 +75,7 @@ if(isset($_GET['id'])) {
 
                         <a href="order.php?id=<?php echo $f_id;?>" class="btn btn-primary">Order Now</a>
                     </div>
+                </div>
                 <?php
             }
         } else {
