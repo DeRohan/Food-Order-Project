@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2023 at 09:59 PM
+-- Generation Time: Dec 07, 2023 at 06:25 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,7 +62,8 @@ CREATE TABLE `tbl_admin_reply` (
 --
 
 INSERT INTO `tbl_admin_reply` (`id`, `fd_id`, `admin_id`, `reply`) VALUES
-(3, 3, 1, 'I js replied :D');
+(3, 3, 1, 'I js replied :D'),
+(5, 4, 1, 'I know right (Ahmed agrees too)');
 
 -- --------------------------------------------------------
 
@@ -76,14 +77,6 @@ CREATE TABLE `tbl_cart` (
   `res_id` int(10) UNSIGNED NOT NULL,
   `quantity` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`cart_id`, `item_id`, `res_id`, `quantity`) VALUES
-(1, 7, 32, 2),
-(1, 7, 32, 2);
 
 -- --------------------------------------------------------
 
@@ -104,7 +97,7 @@ CREATE TABLE `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`cat_id`, `title`, `image_name`, `featured`, `active`) VALUES
-(18, 'Chinese', 'FoodHouse_963.jpeg', 'No', 'Yes'),
+(18, 'Chinese', 'FoodHouse_963.jpeg', 'Yes', 'Yes'),
 (19, 'Desi BBQ', 'FoodHouse_852.jpg', 'No', 'Yes'),
 (20, 'Beverages', 'FoodHouse_905.jpg', 'Yes', 'Yes'),
 (21, 'Burgers', 'FoodHouse_842.jpg', 'Yes', 'Yes'),
@@ -130,7 +123,8 @@ CREATE TABLE `tbl_feedback` (
 --
 
 INSERT INTO `tbl_feedback` (`id`, `user_id`, `fd_desc`, `fd_date`, `replied`) VALUES
-(3, 2, 'MORE MORE REPLY', '2023-12-06', 'Yes');
+(3, 2, 'MORE MORE REPLY', '2023-12-06', 'Yes'),
+(4, 2, 'Laiba has bad Pizzas', '2023-12-07', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -155,7 +149,15 @@ CREATE TABLE `tbl_food` (
 --
 
 INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `cat_id`, `featured`, `active`, `res_id`) VALUES
-(7, 'Babars Momos', 'Yeehaw', 1200, 'Food-Name-3435.jpg', 18, 'Yes', 'Yes', 32);
+(7, 'Babars Momos', 'Yeehaw', 1200, 'Food-Name-3435.jpg', 23, 'No', 'Yes', 32),
+(8, 'Babar Mojito', 'Babar Fav', 800, 'Food-Name-2558.jpg', 20, 'Yes', 'Yes', 32),
+(9, 'Chicken Burger ', 'Anday Wala Burger under the hood', 1200, 'Food-Name-3897.jpg', 21, 'Yes', 'Yes', 37),
+(10, 'Orange Juice', 'Serving the freshness of orange', 700, 'Food-Name-1983.jpg', 20, 'Yes', 'Yes', 37),
+(11, 'Chicken Chowmein', 'We are serving the best noodles', 1200, 'Food-Name-1930.jpg', 18, 'Yes', 'Yes', 38),
+(12, 'Rice Platter', 'The best combination of rice!', 2000, 'Food-Name-2323.jpg', 18, 'No', 'Yes', 38),
+(13, 'Soup Dumplings', 'The best dim sums in Karachi', 2000, 'Food-Name-3692.jpg', 23, 'Yes', 'Yes', 38),
+(14, 'Cheese Pizza', 'Let the cheese enhance your mood', 1500, 'Food-Name-9712.jpg', 22, 'Yes', 'Yes', 39),
+(15, 'Vegetarian Pizza', 'Indulge the veggies', 1800, 'Food-Name-1657.jpg', 22, 'No', 'Yes', 39);
 
 -- --------------------------------------------------------
 
@@ -173,6 +175,14 @@ CREATE TABLE `tbl_orders` (
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `tbl_orders`
+--
+
+INSERT INTO `tbl_orders` (`order_id`, `user_id`, `restaurant_id`, `date`, `address`, `payment`, `status`) VALUES
+(6, 2, 32, '2023-12-06', 'Cantt Station Habib Metro', 'Cash on Delivery', 'Delivered'),
+(7, 2, 39, '2023-12-07', 'Cantt Station Habib Metro', 'Cash on Delivery', 'Delivered');
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +196,15 @@ CREATE TABLE `tbl_order_details` (
   `quantity` int(11) NOT NULL,
   `price` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_order_details`
+--
+
+INSERT INTO `tbl_order_details` (`id`, `order_id`, `item_id`, `quantity`, `price`) VALUES
+(10, 6, 7, 1, 1200),
+(11, 7, 14, 1, 1500),
+(12, 7, 15, 1, 1800);
 
 -- --------------------------------------------------------
 
@@ -208,12 +227,10 @@ CREATE TABLE `tbl_restaurants` (
 --
 
 INSERT INTO `tbl_restaurants` (`ID`, `Name`, `Description`, `Address`, `username`, `password`, `image_name`) VALUES
-(25, 'Cafe Premo', 'www are owned by xanders', 'zamzama commerical', 'premo', 'c93ccd78b2076528346216b3b2f701e6', NULL),
 (32, 'Cafe Xanders', 'We make the best Pasta in Karachi!', 'Phase 5 Near Dolmen Mall', 'xanders', 'c93ccd78b2076528346216b3b2f701e6', NULL),
-(33, 'Cafe Floc', 'we are boring and like every other cafe', 'zamzama phase 5 defence', 'floc', '25d55ad283aa400af464c76d713c07ad', NULL),
-(34, 'Kabab Fries', 'We serve McDonalds fries', 'Sindhi Muslim', 'kbfries', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_682.png'),
-(35, 'Mcdonalds Gingy', 'We serve Gingerbread ', 'Cantt Station', 'gingy', 'c93ccd78b2076528346216b3b2f701e6', 'Restaurant_912.png'),
-(36, 'KFC', 'We serve fried chicken', 'Sindhi Muslim', 'friedchicken', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_458.png');
+(37, 'Cafe Premo', 'We are owned by Xanders', 'Zamzama Commercial ', 'premo', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_37.jpg'),
+(38, 'Wok Chinese', 'We wok it so you lok (like) it!', 'Dolmen Mall', 'wok', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_820.jpg'),
+(39, 'Laiba Pizzeria', 'Laiba is the best chef (she forced me to write this)', 'Lyari Express Highway', 'pizza', '25d55ad283aa400af464c76d713c07ad', 'Restaurant_716.jpg');
 
 -- --------------------------------------------------------
 
@@ -232,12 +249,10 @@ CREATE TABLE `tbl_restaurant_registration` (
 --
 
 INSERT INTO `tbl_restaurant_registration` (`registration_id`, `restaurant_id`, `registration_date`) VALUES
-(6, 25, '2023-12-05'),
 (7, 32, '2023-12-05'),
-(8, 33, '2023-12-05'),
-(9, 34, '2023-12-06'),
-(10, 35, '2023-12-06'),
-(11, 36, '2023-12-06');
+(12, 37, '2023-12-07'),
+(13, 38, '2023-12-07'),
+(14, 39, '2023-12-07');
 
 -- --------------------------------------------------------
 
@@ -253,6 +268,14 @@ CREATE TABLE `tbl_transactions` (
   `method` varchar(20) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_transactions`
+--
+
+INSERT INTO `tbl_transactions` (`tr_id`, `order_id`, `amount`, `tr_date`, `method`, `status`) VALUES
+(2, 6, 1200, '2023-12-06', 'Cash on Delivery', 'Paid'),
+(3, 7, 3300, '2023-12-07', 'Cash on Delivery', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -396,7 +419,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_admin_reply`
 --
 ALTER TABLE `tbl_admin_reply`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_categories`
@@ -408,43 +431,43 @@ ALTER TABLE `tbl_categories`
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_order_details`
 --
 ALTER TABLE `tbl_order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_restaurants`
 --
 ALTER TABLE `tbl_restaurants`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_restaurant_registration`
 --
 ALTER TABLE `tbl_restaurant_registration`
-  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `registration_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_transactions`
 --
 ALTER TABLE `tbl_transactions`
-  MODIFY `tr_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `tr_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
