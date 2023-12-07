@@ -56,8 +56,6 @@
                                 <?php 
                                     if(isset($_SESSION['customer'])) {
                                         echo '<a href="'.$home_url.'usr-sout.php">Sign Out</a>';
-                                    } else {
-                                        echo '<a href="'.$home_url.'select-option.php">Login/Sign Up</a>';
                                     }
                                 ?>
                             </li>
