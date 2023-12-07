@@ -53,9 +53,9 @@
                             <?php echo $status ?>
                         </td>
                         <td>
-                            <form action="" method="POST" id="statusForm">
+                            <form action="" method="POST" name="status-change" id="statusForm_<?php echo $order_id; ?>">
                                 <!-- <label for="status">Change Status</label> -->
-                                <select name="status" id="status" onchange="document.getElementById('statusForm').submit()"
+                                <select name="status" onchange="document.getElementById('statusForm_<?php echo $order_id; ?>').submit()"
                                     style="width: 100; height: 30;background-color: #38ada9;font-size: 15;">
                                     <option value="Ordered">Ordered</option>
                                     <option value="Preparing">Preparing</option>
@@ -76,7 +76,7 @@
 <?php include('partials/footer.php'); ?>
 
 <?php 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $order_id = $_POST['order_id'];
         $new_status = $_POST['status'];
     

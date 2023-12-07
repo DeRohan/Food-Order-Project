@@ -73,6 +73,15 @@ include('partials-usr/login-check.php');
             cursor: pointer;
             font-size: 16px;
         }
+        .empty-btn {
+            background-color: #d63031;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -124,6 +133,9 @@ include('partials-usr/login-check.php');
             </a>
             <a href="<?php echo $home_url;?>">
                 <button action="" class="continue-btn">Continue Shopping</button>
+            </a>
+            <a href="<?php echo $home_url;?>empty-cart.php">
+                <button action="" class="empty-btn">Empty Cart</button>
             </a>
         </div>
     </section>
