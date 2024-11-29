@@ -31,10 +31,13 @@
                 $res_result = mysqli_query($conn, $res_query);
                 $res_row = mysqli_fetch_assoc($res_result);
                 $res_name = $res_row['Name'];
+                $sas_token = "sp=r&st=2024-11-29T15:55:23Z&se=2024-12-04T23:55:23Z&sv=2022-11-02&sr=c&sig=rdsRcK6vUfxfbO84ExIggwcvEKQ5DiwZ5FTjI%2BTxLU4%3D";
+                // Construct the Azure Blob Storage URL
+                $azure_blob_url = "https://thefoodhouse94a9.blob.core.windows.net/images/" . $image_name . "?" . $sas_token;
                 ?>
                 <div class="food-menu-box">
                     <div class="food-menu-img">
-                        <img src="<?php echo $home_url; ?>images/restaurant/<?php echo $image_name;?>" alt="<?php echo $f_title;?>" class="img-responsive img-curve">
+                    <img src="<?php echo $azure_blob_url; ?>" alt="<?php echo $f_title; ?>" class="img-responsive img-curve">
                     </div>
 
                     <div class="food-menu-desc">

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php include('partials-usr/menu.php') 
-
-?>
+<?php include('partials-usr/menu.php') ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,12 +52,10 @@
 <body>
     <section class="food-search text-center">
         <div class="container">
-            
             <form action="rest-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for Restaurant.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
-
         </div>
     </section>
 
@@ -78,21 +74,20 @@
                         $title = $row['Name'];
                         $description = $row['Description'];
                         $image_name = $row['image_name'];
+                        // URL of your Azure Blob Storage container
+                        $azure_blob_url = "https://thefoodhouse94a9.blob.core.windows.net/images";
+                        $sas_token = "sp=r&st=2024-11-29T15:55:23Z&se=2024-12-04T23:55:23Z&sv=2022-11-02&sr=c&sig=rdsRcK6vUfxfbO84ExIggwcvEKQ5DiwZ5FTjI%2BTxLU4%3D";
+
+                        // Check if an image is uploaded and use it, otherwise use the default image
+                        if ($image_name === NULL) {
+                            $image_url = "https://thefoodhouse94a9.blob.core.windows.net/images/restaurant_default.jpg?" . $sas_token; // Default image
+                        } else {
+                            $image_url = $azure_blob_url . "/" . $image_name . "?" . $sas_token; // Image URL from Azure Blob Storage
+                        }
                         ?>
                             <a href="restaurant-details.php?id=<?php echo $id;?>">
                                 <div class="box-3 float-container">
-                                    <?php
-                                    if($image_name===NULL) {
-                                        ?>
-                                        <img src="<?php echo $home_url; ?>images/restaurant/restaurant_default.jpg" alt="Restaurant Image" class="img-responsive img-curve">
-                                        <?php
-                                    }
-                                    else{
-                                        ?>
-                                        <img src="<?php echo $home_url;?>images/restaurant/<?php echo $image_name;?>" alt="Restaurant Image" class="img-responsive img-curve">
-                                        <?php
-                                    }
-                                    ?>
+                                    <img src="<?php echo $image_url;?>" alt="Restaurant Image" class="img-responsive img-curve">
                                     <div class="overlay">
                                         <h3> <?php echo $title; ?></h3>
                                         <p> <?php echo $description; ?></p>
@@ -103,11 +98,11 @@
                     }
                 }
             ?>
-
-
             <div class="clearfix"></div>
         </div>
     </section>
     <!-- Restaurant Section Ends Here -->
 
 <?php include ('partials-usr/footer.php');?>
+</body>
+</html>

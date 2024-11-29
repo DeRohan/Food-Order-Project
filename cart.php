@@ -107,64 +107,67 @@ include('partials-usr/login-check.php');
         }
         ?>
 
-        <div class="cart-container">
-            <?php
-            $sql = "SELECT * FROM tbl_cart";
-            $result = mysqli_query($conn, $sql);
-            $count = mysqli_num_rows($result);
-            $total = 0;
-            if ($count > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $f_id = $row['item_id'];
-                    $quantity = $row['quantity'];
+<div class="cart-container">
+    <?php
+    $sql = "SELECT * FROM tbl_cart";
+    $result = mysqli_query($conn, $sql);
+    $count = mysqli_num_rows($result);
+    $total = 0;
+    if ($count > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $f_id = $row['item_id'];
+            $quantity = $row['quantity'];
 
-                    $sql2 = "SELECT * FROM tbl_food WHERE id = $f_id";
-                    $result2 = mysqli_query($conn, $sql2);
-                    $row2 = mysqli_fetch_assoc($result2);
-                    $f_title = $row2['title'];
-                    $f_price = $row2['price'];
-                    $image_name = $row2['image_name'];
-                    $total += ($f_price * $quantity);
-                    ?>
-                    <div class="cart-item">
-                        <img src="<?php echo $home_url; ?>images/restaurant/<?php echo $image_name; ?>"
-                            alt="<?php echo $f_title; ?>">
-                        <div>
-                            <h3>
-                                <?php echo $f_title; ?>
-                            </h3>
-                            <p>Price:
-                                <?php echo $f_price; ?>
-                            </p>
-                            <p>Quantity:
-                                <?php echo $quantity; ?>
-                            </p>
-                        </div>
-                        <p>
-                            <?php echo $f_price * $quantity; ?>
-                        </p>
-                    </div>
-                    <?php
-                }
-            }
+            $sql2 = "SELECT * FROM tbl_food WHERE id = $f_id";
+            $result2 = mysqli_query($conn, $sql2);
+            $row2 = mysqli_fetch_assoc($result2);
+            $f_title = $row2['title'];
+            $f_price = $row2['price'];
+            $image_name = $row2['image_name'];
+            $total += ($f_price * $quantity);
+            $sas_token = "sp=r&st=2024-11-29T15:55:23Z&se=2024-12-04T23:55:23Z&sv=2022-11-02&sr=c&sig=rdsRcK6vUfxfbO84ExIggwcvEKQ5DiwZ5FTjI%2BTxLU4%3D";
+            // Construct the Azure Blob Storage URL
+            $azure_blob_url = "https://thefoodhouse94a9.blob.core.windows.net/images/" . $image_name . "?" . $sas_token;
             ?>
-            <div class="cart-total">
-                <h3>Total</h3>
+            <div class="cart-item">
+                <!-- Update image src to Azure Blob Storage URL -->
+                <img src="<?php echo $azure_blob_url; ?>" alt="<?php echo $f_title; ?>">
+                <div>
+                    <h3>
+                        <?php echo $f_title; ?>
+                    </h3>
+                    <p>Price:
+                        <?php echo $f_price; ?>
+                    </p>
+                    <p>Quantity:
+                        <?php echo $quantity; ?>
+                    </p>
+                </div>
                 <p>
-                    <?php echo $total; ?>
+                    <?php echo $f_price * $quantity; ?>
                 </p>
             </div>
-            <br><br>
-            <a href="checkout.php">
-                <button class="checkout-btn">Proceed to Checkout</button>
-            </a>
-            <a href="<?php echo $home_url; ?>">
-                <button action="" class="continue-btn">Continue Shopping</button>
-            </a>
-            <a href="<?php echo $home_url; ?>empty-cart.php">
-                <button action="" class="empty-btn">Empty Cart</button>
-            </a>
-        </div>
+            <?php
+        }
+    }
+    ?>
+    <div class="cart-total">
+        <h3>Total</h3>
+        <p>
+            <?php echo $total; ?>
+        </p>
+    </div>
+    <br><br>
+    <a href="checkout.php">
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </a>
+    <a href="<?php echo $home_url; ?>">
+        <button action="" class="continue-btn">Continue Shopping</button>
+    </a>
+    <a href="<?php echo $home_url; ?>empty-cart.php">
+        <button action="" class="empty-btn">Empty Cart</button>
+    </a>
+</div>
     </section>
 </body>
 
