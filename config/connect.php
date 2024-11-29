@@ -2,11 +2,12 @@
 
     session_start();
 
-    $db_username = "root";
-    $server_password = "";
+    $db_username = "rohan";
+    $server_password = "Admin123";
     $db_name = "food-order";
     $home_url = "http://localhost/food-order-project/";
-    $conn = mysqli_connect('localhost', $db_username, $server_password);
+    $host = "food-house.mysql.database.azure.com";
+    $conn = mysqli_connect($host, $db_username, $server_password);
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
