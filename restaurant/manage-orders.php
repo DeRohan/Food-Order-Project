@@ -41,9 +41,6 @@
                             <?php echo $usrname ?>
                         </td>
                         <td>
-                            <?php echo $restaurant_name ?>
-                        </td>
-                        <td>
                             <?php echo $item_title ?>
                         </td>
                         <td>
