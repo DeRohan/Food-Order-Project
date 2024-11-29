@@ -37,6 +37,7 @@
             ";
         $result = mysqli_query($conn, $sql);
         if($result==true) {
+            echo "User Registered but Redirection Failed...";
             $_SESSION['login'] = "<div class='success'>User Registered Successfully! :D</div>";
             header("location:" .$home_url.'login-usr.php');
         }
