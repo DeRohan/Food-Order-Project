@@ -1,0 +1,11 @@
+{
+    "azureFunctions.deploySubpath": ".",
+    "azureFunctions.postDeployTask": "npm install (functions)",
+    "azureFunctions.projectLanguage": "JavaScript",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.projectLanguageModel": 4,
+    "azureFunctions.preDeployTask": "npm prune (functions)",
+    "appService.defaultWebAppToDeploy": "/subscriptions/71d5083a-145a-4618-92f3-9bfdd55e37a7/resourceGroups/TheFoodHouse/providers/Microsoft.Web/sites/thefoodhouse",
+    "appService.deploySubpath": "."
+}

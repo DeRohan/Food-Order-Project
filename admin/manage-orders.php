@@ -91,8 +91,24 @@
 
 <?php include('partials/footer.php') ?>
 
-<?php
+<?php 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $order_id = $_POST['order_id'];
+        $new_status = $_POST['status'];
+    
+        // Perform the database update here
+        $update_query = "UPDATE tbl_orders SET status = '$new_status' WHERE order_id = $order_id";
+        $update_result = mysqli_query($conn, $update_query);
+    
+        if ($update_result) {
+            echo "Order status updated successfully.";
+        } else {
+            echo "Error updating order status: " . mysqli_error($conn);
+        }
+    }
+?>
 
+<?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $order_id = $_POST['order_id'];
     $new_status = $_POST['status'];
@@ -102,7 +118,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $update_result = mysqli_query($conn, $update_query);
 
     if ($update_result) {
-        echo "Order status updated successfully.";
+        // Notify Azure Function App
+        $functionUrl = "https://ordernotificationapp.azurewebsites.net/api/OrderStatusNotification"; // Replace with your Function App URL
+        $payload = json_encode([
+            "order_id" => $order_id,
+            "new_status" => $new_status,
+        ]);
+
+        // Use cURL to make the request
+        $ch = curl_init($functionUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'x-functions-key: 4sfDLJgZYBzf_Ak7j1oQ463RsPgA8cyMF-11aCxizIs2AzFuLcgAdA==' // Replace with your Function App key
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode == 200) {
+            echo "Order status updated successfully and notification sent.";
+        } else {
+            echo "Order status updated, but notification failed: $response";
+        }
     } else {
         echo "Error updating order status: " . mysqli_error($conn);
     }
