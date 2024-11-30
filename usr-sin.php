@@ -3,7 +3,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $emu = $_POST['email'];
         $pwd = md5($_POST['pwd']);
-        
+
         $sql = "SELECT * FROM tbl_users WHERE (email='$emu' OR username = '$emu') AND password='$pwd'";
         $result = mysqli_query($conn, $sql);
         if($result==true) {
@@ -12,6 +12,7 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['login'] = $row['username'];
                 $_SESSION['customer'] = $row['user_id'];
+                echo "Redirecting...";
                 header("location:" .$home_url.'index.php');
                 exit();
             }
