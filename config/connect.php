@@ -6,6 +6,7 @@
     $server_password = "Admin123";
     $db_name = "food-order";
     $home_url = "https://thefoodhouse-dbdzf2ematahbfg0.canadacentral-01.azurewebsites.net/";
+    // $home_url = "http://localhost/Food-Order-Project/";
     $host = "food-house.mysql.database.azure.com";
     $conn = mysqli_connect($host, $db_username, $server_password);
 
@@ -21,7 +22,6 @@
 
 ?>
 
-
 <?php
     session_start();
 
@@ -31,6 +31,7 @@
     $database_id = "food-order"; // Same as your MySQL database name
     $collection_id = "tbl_users";  // Replace with your Cosmos DB collection name
     $home_url = "https://thefoodhouse-dbdzf2ematahbfg0.canadacentral-01.azurewebsites.net/";
+    // $home_url = "http://localhost/Food-Order-Project/";
 
     // Function to send requests to Cosmos DB
     function cosmos_request($url, $method = "GET", $body = null) {
