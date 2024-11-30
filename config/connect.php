@@ -73,5 +73,5 @@
         die("Connection to Cosmos DB failed.");
     }
 
-    echo "Connected to Cosmos DB successfully!";
+    // echo "Connected to Cosmos DB successfully!";
 ?>
