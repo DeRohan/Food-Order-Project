@@ -1,4 +1,5 @@
 <?php include('partials-usr/menu.php') ?>
+<?php include('config/connect.php');?>
 <!-- fOOD sEARCH Section Starts Here -->
 <section class="food-search text-center">
     <div class="container">
