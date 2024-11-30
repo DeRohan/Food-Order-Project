@@ -12,7 +12,8 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['login'] = $row['username'];
                 $_SESSION['customer'] = $row['user_id'];
-                echo "Redirecting...";
+                echo "\nRedirecting...";
+                echo $home_url."index.php";
                 header("location:" .$home_url.'index.php');
                 exit();
             }
