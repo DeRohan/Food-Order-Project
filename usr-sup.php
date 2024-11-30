@@ -28,7 +28,7 @@
             }
         }
         $sql = "INSERT INTO tbl_users SET
-            user_id = 6,
+            user_id = 7,
             username = '$username',
             password = '$pwd',
             email = '$email',
