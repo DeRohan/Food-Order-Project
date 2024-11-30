@@ -3,6 +3,7 @@
     
     unset($_SESSION['admin']);
 
-    header("location:".$home_url."admin/login.php")
+    // header("location:".$home_url."admin/login.php");
+    echo "<script>window.location.href='" . $home_url . "admin/login.php';</script>";
 
 ?>

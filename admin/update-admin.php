@@ -64,11 +64,14 @@
 
         if($result==true) {
             $_SESSION['update'] = "<div class='success'>Admin Updated Succesfully!</div>";
-            header("location:" .$home_url.'admin/admin-panel.php');
+            // header("location:" .$home_url.'admin/admin-panel.php');
+            echo "<script>window.location.href='" . $home_url . "admin/admin-panel.php';</script>";
         }
         else{
             $_SESSION['update'] = "<div class='error'>Failed to Update Admin!</div>";
-            header("location:" .$home_url.'admin/admin-panel.php');
+            // header("location:" .$home_url.'admin/admin-panel.php');
+            echo "<script>window.location.href='" . $home_url . "admin/admin-panel.php';</script>";
+
         }
     }
 ?>

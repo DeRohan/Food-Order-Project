@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($update_result) {
         // Notify Azure Function App
-        $functionUrl = "https://ordernotificationapp.azurewebsites.net/api/OrderStatusNotification"; // Replace with your Function App URL
+        $functionUrl = "https://ordernotificationapp.azurewebsites.net/api/OrderStatusNotification";
         $payload = json_encode([
             "order_id" => $order_id,
             "new_status" => $new_status,

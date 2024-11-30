@@ -42,11 +42,13 @@
             $row = mysqli_fetch_assoc($result);
             $_SESSION['login'] = "<div class='success'>Login Successful!</div>";
             $_SESSION['admin'] = $row['admin_id'];
-            header('location:'.$home_url.'admin/');
+            // header('location:'.$home_url.'admin/');
+            echo "<script>window.location.href='" . $home_url . "admin/index.php';</script>";
         } 
         else {
             $_SESSION['login'] = "<div class='error'>Username or Password Did not Match :(</div>";
-            header('location:'.$home_url.'admin/login.php');
+            // header('location:'.$home_url.'admin/login.php');
+            echo "<script>window.location.href='" . $home_url . "admin/login.php';</script>";
         }
     }
 
