@@ -12,12 +12,14 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['login'] = $row['username'];
                 $_SESSION['customer'] = $row['user_id'];
-                header("location:" .$home_url.'index.php');
+                // header("location:" .$home_url.'index.php');
+                echo "<script>window.location.href='" . $home_url . "index.php';</script>";
                 exit();
             }
             else{
                 $_SESSION['login'] = "<div class='error'>Invalid Credentials! :(</div>";
-                header("location:" .$home_url.'login-usr.php');
+                echo "<script>window.location.href='" . $home_url . "login-usr.php';</script>";
+                // header("location:" .$home_url.'login-usr.php');
             }
         }
     }
