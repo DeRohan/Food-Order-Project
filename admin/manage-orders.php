@@ -22,14 +22,20 @@
                 <th>Actions</th>
             </tr>
             <?php
+            // $sql = "SELECT o.order_id, r.Name as restaurant_name, f.title as item_name, od.quantity, f.price, o.status, u.username as username, tr.amount
+            //         FROM tbl_orders o
+            //         INNER JOIN tbl_order_details od ON o.order_id = od.order_id
+            //         INNER JOIN tbl_food f ON od.item_id = f.id
+            //         INNER JOIN tbl_restaurants r ON o.restaurant_id = r.ID
+            //         INNER JOIN tbl_users u ON o.user_id = u.user_id
+            //         INNER JOIN tbl_transactions tr ON o.order_id = tr.order_id";
             $sql = "SELECT o.order_id, r.Name as restaurant_name, f.title as item_name, od.quantity, f.price, o.status, u.username as username, tr.amount
-                    FROM tbl_orders o
-                    INNER JOIN tbl_order_details od ON o.order_id = od.order_id
-                    INNER JOIN tbl_food f ON od.item_id = f.id
-                    INNER JOIN tbl_restaurants r ON o.restaurant_id = r.ID
-                    INNER JOIN tbl_users u ON o.user_id = u.user_id
-                    INNER JOIN tbl_transactions tr ON o.order_id = tr.order_id";
-
+            FROM tbl_orders o
+            LEFT JOIN tbl_order_details od ON o.order_id = od.order_id
+            LEFT JOIN tbl_food f ON od.item_id = f.id
+            LEFT JOIN tbl_restaurants r ON o.restaurant_id = r.ID
+            LEFT JOIN tbl_users u ON o.user_id = u.user_id
+            LEFT JOIN tbl_transactions tr ON o.order_id = tr.order_id";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
