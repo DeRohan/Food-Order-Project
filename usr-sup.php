@@ -11,7 +11,6 @@
 
         $check = "SELECT * FROM tbl_users";
         $result = mysqli_query($conn, $check);
-        echo "\nChecking Existing Users...";
         if(mysqli_num_rows($result)>0) {
             while($row = mysqli_fetch_assoc($result)) {
                 if($row['username'] == $username) {
@@ -26,7 +25,6 @@
                 }
             }
         }
-        echo "\nUsers Verified! Let's Register....";
         $sql = "INSERT INTO tbl_users SET
             user_id = 5,
             username = '$username',
@@ -38,11 +36,9 @@
             address = '$addr'
             ";
         $result = mysqli_query($conn, $sql);
-        echo "\nSaving User...";
         if($result==true) {
             $_SESSION['login'] = "<div class='success'>User Registered Successfully! :D</div>";
             header("location:" .$home_url.'login-usr.php');
-            echo "Redirected...";
             exit();
         }
         else{
