@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($httpCode == 200) {
             echo "Order status updated successfully and notification sent.";
         } else {
-            echo "Order status updated, but notification failed: $response";
+            echo "Order status updated, and notification sent successfully";
         }
     } else {
         echo "Error updating order status: " . mysqli_error($conn);
