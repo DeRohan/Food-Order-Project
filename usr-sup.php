@@ -28,6 +28,7 @@
         }
         echo "\nUsers Verified! Let's Register....";
         $sql = "INSERT INTO tbl_users SET
+            user_id = 5,
             username = '$username',
             password = '$pwd',
             email = '$email',
