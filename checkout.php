@@ -45,6 +45,7 @@
                     $total = $f_price * $quantity;
                     $total_amount = $total_amount + $total;
                     $sql_details = "INSERT INTO tbl_order_details SET
+                        id = $current_order+1,
                         order_id = $current_order,
                         item_id = $f_id,
                         quantity = $quantity,
@@ -54,6 +55,7 @@
                 }
             }
             $sql_tr = "INSERT INTO tbl_transactions SET
+                tr_id = $current_order-1,
                 order_id = $current_order,
                 amount = $total_amount,
                 method = '$payment',
