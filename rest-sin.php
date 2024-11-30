@@ -9,11 +9,13 @@
         if(mysqli_num_rows($result) == 1) {
             $_SESSION['login-rest'] = "<div class='success'>Login Successful!</div>";
             $_SESSION['restaurant'] = $username;
-            header('location:'.$home_url.'restaurant/index.php');
+            // header('location:'.$home_url.'restaurant/index.php');
+            echo "<script>window.location.href='" . $home_url . "restaurant/index.php';</script>";
         }
         else {
             $_SESSION['login-rest'] = "<div class='error'>Username or Password Did not Match :(</div>";
-            header('location:'.$home_url.'select-option.php');
+            // header('location:'.$home_url.'select-option.php');
+            echo "<script>window.location.href='" . $home_url . "select-option.php';</script>";
         }
 
     }

@@ -65,16 +65,19 @@
                 $sql_del = "DELETE FROM tbl_cart";
                 $res_del = mysqli_query($conn, $sql_del);
                 $_SESSION['order'] = "<div class='success'>Order Placed Successfully.</div>";
-                header("location:".$home_url."index.php");
+                // header("location:".$home_url."index.php");
+                echo "<script>window.location.href='" . $home_url . "index.php';</script>";
             }
             else{
                 $_SESSION['order'] = "<div class='error'>Failed to Place Order.</div>";
-                header("location:".$home_url."index.php");
+                // header("location:".$home_url."index.php");
+                echo "<script>window.location.href='" . $home_url . "index.php';</script>";
             }
         }
     }
     else{
         $_SESSION['cart'] = "<div class='error'>Your cart is empty.</div>";
-        header("location:".$home_url."restaurants.php");
+        // header("location:".$home_url."restaurants.php");
+        echo "<script>window.location.href='" . $home_url . "restaurants.php';</script>";
     }
 ?>

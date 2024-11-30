@@ -1,6 +1,4 @@
-<?php include('partials-usr/menu.php');
-include('config/connect.php');
-?>
+<?php include('partials-usr/menu.php');?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -18,7 +18,8 @@
                 $upload = move_uploaded_file($source_path, $destination_path);
                 if($upload == 0) {
                     $_SESSION['login'] = "<div class='error'>Failed to Upload Image!</div>";
-                    header("location:" .$home_url.'login-rest.php');
+                    // header("location:" .$home_url.'login-rest.php');
+                    echo "<script>window.location.href='" . $home_url . "login-rest.php';</script>";
                     die();
                 }
             }
@@ -36,7 +37,8 @@
             while($row = mysqli_fetch_assoc($result)) {
                 if($row['username'] == $username) {
                     $_SESSION['login'] = "<div class='error'>Username Already Exists!</div>";
-                    header("location:" .$home_url.'login-rest.php');
+                    // header("location:" .$home_url.'login-rest.php');
+                    echo "<script>window.location.href='" . $home_url . "login-rest.php';</script>";
                     die();
                 }
             }
@@ -61,12 +63,14 @@
             $result2 = mysqli_query($conn, $sql2);
             if($result2){
                 $_SESSION['login'] = "<div class='success'>Restaurant Created Succesfully!</div>";
-                header("location:" .$home_url.'restaurant/index.php');
+                // header("location:" .$home_url.'restaurant/index.php');
+                echo "<script>window.location.href='" . $home_url . "restaurant/index.php';</script>";
             }
         }
         else{
             $_SESSION['login'] = "<div class='error'>Failed to Create Restaurant!</div>";
-            header("location:" .$home_url.'login-rest.php');
+            // header("location:" .$home_url.'login-rest.php');
+            echo "<script>window.location.href='" . $home_url . "login-rest.php';</script>";
         }
     }
 

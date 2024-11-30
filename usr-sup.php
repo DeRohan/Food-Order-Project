@@ -15,12 +15,14 @@
             while($row = mysqli_fetch_assoc($result)) {
                 if($row['username'] == $username) {
                     $_SESSION['login'] = "<div class='error'>Username Already Exists!</div>";
-                    header("location:" .$home_url.'login-usr.php');
+                    // header("location:" .$home_url.'login-usr.php');
+                    echo "<script>window.location.href='" . $home_url . "login-usr.php';</script>";
                     die();
                 }
                 if($row['email'] == $email) {
                     $_SESSION['login'] = "<div class='error'>Email Already Exists!</div>";
-                    header("location:" .$home_url.'login-usr.php');
+                    // header("location:" .$home_url.'login-usr.php');
+                    echo "<script>window.location.href='" . $home_url . "login-usr.php';</script>";
                     die();
                 }
             }
@@ -38,12 +40,14 @@
         $result = mysqli_query($conn, $sql);
         if($result==true) {
             $_SESSION['login'] = "<div class='success'>User Registered Successfully! :D</div>";
-            header("location:" .$home_url.'login-usr.php');
+            // header("location:" .$home_url.'login-usr.php');
+            echo "<script>window.location.href='" . $home_url . "login-usr.php';</script>";
             exit();
         }
         else{
             $_SESSION['login'] = "<div class='error'>Failed to Register User! :(</div>";
-            header("location:" .$home_url.'login-usr.php');
+            // header("location:" .$home_url.'login-usr.php');
+            echo "<script>window.location.href='" . $home_url . "login-usr.php';</script>";
         }
     }
 ?>
