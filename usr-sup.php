@@ -40,9 +40,10 @@
         $result = mysqli_query($conn, $sql);
         echo "\nSaving User...";
         if($result==true) {
-            echo "\nUser Registered but Redirection Failed...";
             $_SESSION['login'] = "<div class='success'>User Registered Successfully! :D</div>";
             header("location:" .$home_url.'login-usr.php');
+            echo "Redirected...";
+            exit();
         }
         else{
             $_SESSION['login'] = "<div class='error'>Failed to Register User! :(</div>";

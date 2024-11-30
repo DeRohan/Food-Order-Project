@@ -42,6 +42,7 @@
             }
         }
         $sql = "INSERT INTO tbl_restaurants SET
+            ID = 5,
             username = '$username',
             password = '$password',
             Name = '$r_name',
