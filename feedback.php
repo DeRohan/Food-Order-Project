@@ -21,7 +21,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insert_fd_res = mysqli_query($conn, $insert_fd);
         if($insert_fd_res) {
             echo "<script>alert('Your Feedback has been submitted successfully! Thank you.');</script>";
-            header('location: '.$home_url.'feedback.php');
+            // header('location: '.$home_url.'feedback.php');
+            echo "<script>window.location.href='" . $home_url . "feedback.php';</script>";
         } else {
             echo "Error: ".mysqli_error($conn);
         }
