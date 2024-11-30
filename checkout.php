@@ -21,6 +21,7 @@
         $res_id = $row['res_id'];
 
         $order_query = "INSERT INTO tbl_orders SET
+            order_id = $user_id+1,
             user_id = $user_id,
             restaurant_id = $res_id,
             date = '$ord_date',
